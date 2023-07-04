@@ -1,0 +1,39 @@
+/*Estilo de tag: le da un estilo a todos los mismos tags, se escribe sin nada*/
+a {
+    background-color: red;
+    text-decoration: none;
+}
+
+/*Estilo de clase: le da un estilo a todos los que tengan esa clase, se escribe con un punto al principio, tienen mayor prioridad que los estilos de etiqueta*/
+.greenText {
+    color: green;
+}
+
+.blackBg {
+    background-color: black;
+}
+
+.blueBg {
+    background-color: blue !important;
+}
+
+.redBg {
+    background-color: red;
+}
+
+/*Estilo de id: le da un estilo a el elemento que tenga ese id, se escribe con un # al principio, tienen mayor prioridad que los estilos de clase*/
+#titleBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/*
+Maneras de dar prioridad: En orden de prioridad (o sea prioridad de prioridades)
+
+- Estilo en cascada: En estilos de la misma prioridad supera el que más abajo esté en el archivo CSS. Ejemplo: más arriba, si un elemento tiene clase blackBg y redBg, se le asigna redBg.
+- Estilo tag-clase-id: Lo vimos arriba.
+- Agregar !important: Se agrega en el valor de un estilo, le da importancia por encima de los demas. Tiene más prioridad que los estilos tag-clase-id y que los estilos en cascada pero no más que el de atributo style. En el ejemplo de arriba, si un elemento tiene bgBlue y bgRed, quedaría con bgBlue.
+- Dar estilo en el atributo style: Una de las máximas prioridades. Se le asigna estilo en el atributo style del tag. Ejemplo: <a class="redBg" style="background-color:blue">...</a> tendría fondo azul. Se usa en casos de emergencia o para probar cosas.
+*/

@@ -1,0 +1,4 @@
+- Creando el formulario de nuevo usuario.
+- Estilizando la pagina de nuevo usuario.
+- Funcionalidad (Todavia no va a estar el backend).
+- Backend para crear usuario.
