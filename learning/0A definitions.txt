@@ -1,0 +1,26 @@
+Herramientas:
+
+IDE: Entorno de desarrollo, el código se puede escribir en cualquier editor de texto, incluso el block de notas, 
+pero un IDE tiene funciones extra como autocompletar, syntax-highlighting, debugger, etc. 
+Los más populares son Visual Studio Code, Atom, Sublime Text, Notepad++, etc. Nosotros estamos usando Visual Studio Code (VSCode).
+
+Git: Sistema de control de versiones, nos permite guardar el código en un repositorio y tener un historial de cambios. 
+Usando servicions como GitHub, también nos permite trabajar en equipo de forma más eficiente. 
+El más popular es Git, pero hay otros como Mercurial, SVN, etc. Nosotros estamos usando Git con GitHub.
+
+Compiladores: Son programas que traducen el código de un lenguaje a el código de la máquina (1s y 0s). Los lenguajes de
+frontend los van a compilar los navegadores, pero los de backend los tenemos que compilar nosotros en el servidor.
+
+
+Frontend y Backend:
+
+- Frontend: es el código que se corre del lado del cliente, o sea en las computadoras de los usuarios.
+Los lenguajes que usamos nosotros son HTML, CSS y JavaScript (son los más comunes).
+    ->HTML: las siglas significan HyperText Markup Language, no es un lenguaje de programación sino de etiquetas ya que
+        no maneja variables. Es el lenguaje que se usa para definir la estructura de la página web.
+    ->CSS: las siglas significan Cascading Style Sheets, tampoco es un lenguaje de programación sino de estilos ya que
+        no maneja variables. Es el lenguaje que se usa para definir el estilo de la página web.
+    ->JavaScript (JS): sí es un lenguaje de programación, es el lenguaje que se usa para definir la funcionalidad de la página web.
+
+- Backend: es el código que se corre del lado del servidor, o sea en la computadora donde está alojada la página web.
+Existe una variedad más amplia de lenguajes, nosotros usamos NodeJS, un lenguaje de backend basado en la sintaxis de JS.
