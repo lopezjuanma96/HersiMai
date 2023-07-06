@@ -1,0 +1,1 @@
+//Son equivalentes a los diccionarios de Python (y un poco más). Tienen distinta sintaxis.

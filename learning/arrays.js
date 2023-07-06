@@ -1,0 +1,1 @@
+// Son equivalentes a las listas de Python. Tienen otra sintaxis.
