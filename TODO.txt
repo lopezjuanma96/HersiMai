@@ -2,3 +2,4 @@
 - Estilizando la pagina de nuevo usuario.
 - Funcionalidad (Todavia no va a estar el backend).
 - Backend para crear usuario.
+- Agregar Regex a los input y al submitbutton del nuevo usuario.
