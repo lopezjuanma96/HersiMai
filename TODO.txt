@@ -3,3 +3,5 @@
 - Funcionalidad (Todavia no va a estar el backend).
 - Backend para crear usuario.
 - Agregar Regex a los input y al submitbutton del nuevo usuario.
+
+PROBAMOS: LUNES esquematizat basico el front y el back + full Front End. MIERCOLES: full back end + retoques.

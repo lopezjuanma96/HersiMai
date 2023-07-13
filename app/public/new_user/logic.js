@@ -2,6 +2,7 @@ const formNameInput = document.getElementById("formNameInput");
 const formEmailInput = document.getElementById("formEmailInput");
 
 const formSubmitButton = document.getElementById("formSubmitButton");
+const formResetButton = document.getElementById("formResetButton");
 
 
 formNameInput.addEventListener('keypress', (e) => {
@@ -33,6 +34,19 @@ formSubmitButton.addEventListener('click', (e) => {
     }
 
     //Enviamos la info
-    console.log("Estoy por enviar esta información")
-    console.log(sendObject)
+    fetch("/api/new_user", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        },
+        body: JSON.stringify(sendObject)
+    }).then((res) => {
+        return res.json()
+    }).then((resJson) => {
+        console.log(resJson);
+        if (resJson.code === "created-user") alert(resJson.msg);
+        else if (resJson.code === "user-exists") alert(resJson.msg);
+        formResetButton.click();
+    }).catch((err) => console.log(err))
 })
