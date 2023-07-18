@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 app.post('/api/new_user', (req, res) => {
     const new_user = req.body;
     console.log(new_user);
-    res.send({code:"created-user", msg:"Se creó un nuevo usuario"});
+    res.send({code:"created-user", msg:"Se creó un nuevo usuario", data:{code: "AAW125"}});
 })
 
 PORT=8080

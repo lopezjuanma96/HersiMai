@@ -1,7 +1,8 @@
-- Creando el formulario de nuevo usuario.
-- Estilizando la pagina de nuevo usuario.
-- Funcionalidad (Todavia no va a estar el backend).
-- Backend para crear usuario.
+CRUCIALES
+- Agregar link del código de usuario generado en new_user a la vista de usuario (igual todavía no existe).
+
+RETOQUES
 - Agregar Regex a los input y al submitbutton del nuevo usuario.
+- Agregar funcionalidad al botón de copiar código de usuario generado en new_user.
 
 PROBAMOS: LUNES esquematizat basico el front y el back + full Front End. MIERCOLES: full back end + retoques.

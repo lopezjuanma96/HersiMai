@@ -4,6 +4,9 @@ const formEmailInput = document.getElementById("formEmailInput");
 const formSubmitButton = document.getElementById("formSubmitButton");
 const formResetButton = document.getElementById("formResetButton");
 
+const codeBlock = document.getElementById("codeBlock");
+const codeText = document.getElementById("codeText");
+const codeCopyButton = document.getElementById("codeCopyButton");
 
 formNameInput.addEventListener('keypress', (e) => {
     if (parseInt(e.key)){ //TODO: Regex for special Symbols
@@ -33,6 +36,7 @@ formSubmitButton.addEventListener('click', (e) => {
         userEmail: sendEmail,
     }
 
+    codeBlock.hidden = true;
     //Enviamos la info
     fetch("/api/new_user", {
         method: "POST",
@@ -44,8 +48,12 @@ formSubmitButton.addEventListener('click', (e) => {
     }).then((res) => {
         return res.json()
     }).then((resJson) => {
-        console.log(resJson);
-        if (resJson.code === "created-user") alert(resJson.msg);
+        //console.log(resJson);
+        if (resJson.code === "created-user") {
+            if (!resJson.data.code) throw new Error("No se retornó código de usuario, reintenter por favor!")
+            codeText.innerText = resJson.data.code;
+            codeBlock.hidden = false;
+        }
         else if (resJson.code === "user-exists") alert(resJson.msg);
         formResetButton.click();
     }).catch((err) => console.log(err))
