@@ -1,5 +1,6 @@
 CRUCIALES
-- Agregar link del código de usuario generado en new_user a la vista de usuario (igual todavía no existe).
+- Crear frontend y backend de la lista de usuarios
+- Crear frontend y backend de el detalle de usuario
 
 RETOQUES
 - Agregar Regex a los input y al submit button del frontend y el backend new_user.

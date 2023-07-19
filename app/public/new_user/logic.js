@@ -6,6 +6,7 @@ const formResetButton = document.getElementById("formResetButton");
 
 const codeBlock = document.getElementById("codeBlock");
 const codeText = document.getElementById("codeText");
+const codeLink = document.getElementById("codeLink");
 const codeCopyButton = document.getElementById("codeCopyButton");
 
 formNameInput.addEventListener('keypress', (e) => {
@@ -37,6 +38,8 @@ formSubmitButton.addEventListener('click', (e) => {
     }
 
     codeBlock.hidden = true;
+    codeText.innerText = "";
+    codeLink.href = ".";
     //Enviamos la info
     fetch("/api/new_user", {
         method: "POST",
@@ -52,6 +55,7 @@ formSubmitButton.addEventListener('click', (e) => {
         if (resJson.code === "created-user") {
             if (!resJson.data.code) throw new Error("No se retornó código de usuario, reintenter por favor!")
             codeText.innerText = resJson.data.code;
+            codeLink.href = `/user_detail?code=${resJson.data.code}`
             codeBlock.hidden = false;
         }
         else if (resJson.code === "user-exists") alert(resJson.msg);
