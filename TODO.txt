@@ -2,7 +2,7 @@ CRUCIALES
 - Agregar link del código de usuario generado en new_user a la vista de usuario (igual todavía no existe).
 
 RETOQUES
-- Agregar Regex a los input y al submitbutton del nuevo usuario.
+- Agregar Regex a los input y al submit button del frontend y el backend new_user.
 - Agregar funcionalidad al botón de copiar código de usuario generado en new_user.
 
 PROBAMOS: LUNES esquematizat basico el front y el back + full Front End. MIERCOLES: full back end + retoques.
