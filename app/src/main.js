@@ -1,6 +1,7 @@
 const express = require("express");
 
-const { newUserHandler } = require("./handlers/new_user.js")
+const { newUserHandler } = require("./handlers/new_user.js");
+const { listUserHandler } = require("./handlers/list_user.js")
 
 const app = express(); // app contiene nuestro servidor
 
@@ -13,6 +14,7 @@ app.get('/', (req, res) => {
     res.send("Hola papá")
 })
 
+app.get('/api/list_user', listUserHandler)
 app.post('/api/new_user', newUserHandler)
 
 PORT=8080

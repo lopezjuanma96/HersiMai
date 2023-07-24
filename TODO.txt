@@ -1,9 +1,14 @@
 CRUCIALES
 - Crear frontend y backend de la lista de usuarios
+- En backend lista de usuarios agregar endpoint para exportar JSON.
 - Crear frontend y backend de el detalle de usuario
+- En backend y frontend de crear usuario y lista de usuarios agregar fecha de creación.
 
 RETOQUES
 - Agregar Regex a los input y al submit button del frontend y el backend new_user.
 - Agregar funcionalidad al botón de copiar código de usuario generado en new_user.
+- En backend lista de usuarios agregar endpoint para exportar Excel u otro formato de tabla.
+- En frontend lista de usuarios ubicar los datos por nombre (no por posición).
+- En frontend lista de usuarios agregar un dato cualitativo (por ejemplo porcentaje de completado) de los procesos de ese usuario.
 
 PROBAMOS: LUNES esquematizat basico el front y el back + full Front End. MIERCOLES: full back end + retoques.
