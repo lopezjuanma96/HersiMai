@@ -6,8 +6,6 @@ RETOQUES
 - Agregar funcionalidad al botón de copiar código de usuario generado en new_user.
 - En backend lista de usuarios agregar endpoint para exportar Excel u otro formato de tabla.
 - En frontend lista de usuarios agregar un dato cualitativo (por ejemplo porcentaje de completado) de los procesos de ese usuario.
-- En fronted lista de usuarios hacer fijos los tamaños de las columnas.
-- En fronted lista de usuarios agregar visualización para sin datos.
 - En frontend lista de usuarios agregar buscador por nombre (capaz por algo más).
 - En frontend lista de usuarios agregar ordenador por nombre y fecha (capaz por algo más).
 

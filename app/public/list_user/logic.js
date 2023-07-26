@@ -30,8 +30,8 @@ const formatUserJson = (user) => {
         <tr>
             <td>${user.userName}</td>
             <td>${user.userEmail}</td>
-            <td><a href="/user_detail?code=${user.userCode}" target="_blank">${user.userCode}<a></td>
-            <td>${formatUserCreationDate(user.creationDate)}</td>
+            <td class="text-center"><a href="/user_detail?code=${user.userCode}" target="_blank">${user.userCode}<a></td>
+            <td class="text-center">${formatUserCreationDate(user.creationDate)}</td>
         </tr>
     `
 }
