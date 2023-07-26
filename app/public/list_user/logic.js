@@ -1,5 +1,7 @@
 const listTableBody = document.getElementById('listTableBody')
+const noDataTableBody = document.getElementById('noDataTableBody')
 
+listTableBody.innerHTML = "";
 fetch('/api/list_user', {
     method: "GET",
     headers: {
@@ -9,12 +11,18 @@ fetch('/api/list_user', {
     respText.json()
 ).then((respJson) => {
     if (respJson.code == 'success'){
-        listTableBody.innerHTML = "";
         const users = respJson.users;
+        if (respJson.users.length == 0) return noDataTableBody.hidden = false;
         for (let user of users) {
             listTableBody.innerHTML += formatUserJson(user)
         }
+        noDataTableBody.hidden = true;
+    } else if (respJson.code == 'no-data'){
+        return noDataTableBody.hidden = false;
     }
+}).catch((err) => {
+    console.log(err.msg);
+    return noDataTableBody.hidden = false;
 })
 
 const formatUserJson = (user) => {
