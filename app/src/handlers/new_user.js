@@ -1,6 +1,4 @@
-const { readFileSync, writeFileSync } = require("fs");
-
-const USER_LIST_PATH = __dirname + "/../data/user_list.json"
+const { readUserListFile, saveUserListFile } = require('./files.js')
 
 const newUserHandler = (req, res) => {
     const newUser = req.body;
@@ -17,12 +15,6 @@ const newUserHandler = (req, res) => {
 
     // SEND RESPONSE
     res.status(201).send({code:"created-user", msg:"Se creó un nuevo usuario", data:{code: newUserCode}});
-}
-
-const readUserListFile = () => {
-    const fileText = readFileSync(USER_LIST_PATH, { encoding : "utf-8"}); // this only reads the text in the file
-    if (fileText === "") return {}
-    return JSON.parse(fileText) || {}; // now we make Node understand what that text means
 }
 
 const userAlreadyExists = (newUser, userList) => {
@@ -42,11 +34,6 @@ const generateUserCode = (userList) => {
         userCode = `${firstDigit}${secondDigit}${thirdDigit}${fourthDigit}`;
     } while (userList[userCode]) // The above process is done until userList[userCode] returns undefined, i.e. the userCode does not appear in userList
     return userCode;
-}
-
-const saveUserListFile = (userList) => {
-    const fileText = JSON.stringify(userList) // de-understand the userList back into a string of text in the JSON format
-    writeFileSync(USER_LIST_PATH, fileText, {encoding: "utf-8"})
 }
 
 module.exports = { newUserHandler }

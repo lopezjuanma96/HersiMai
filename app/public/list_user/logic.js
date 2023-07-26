@@ -20,9 +20,9 @@ fetch('/api/list_user', {
 const formatUserJson = (user) => {
     return `
         <tr>
-            <td>${user.name}</td>
-            <td>${user.email}</td>
-            <td><a href="/user_detail?code=${user.code}" target="_blank">${user.code}<a></td>
+            <td>${user.userName}</td>
+            <td>${user.userEmail}</td>
+            <td><a href="/user_detail?code=${user.userCode}" target="_blank">${user.userCode}<a></td>
         </tr>
     `
 }
