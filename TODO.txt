@@ -1,6 +1,5 @@
 CRUCIALES
 - Crear frontend y backend de el detalle de usuario
-- En backend y frontend de crear usuario y lista de usuarios agregar fecha de creación.
 - En backend lista de usuarios agregar endpoint para exportar JSON.
 
 RETOQUES

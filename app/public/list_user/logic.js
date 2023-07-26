@@ -23,6 +23,15 @@ const formatUserJson = (user) => {
             <td>${user.userName}</td>
             <td>${user.userEmail}</td>
             <td><a href="/user_detail?code=${user.userCode}" target="_blank">${user.userCode}<a></td>
+            <td>${formatUserCreationDate(user.creationDate)}</td>
         </tr>
     `
+}
+
+const formatUserCreationDate = (milis) => {
+    if (!milis) return "Sin dato";
+    if (!parseInt(milis)) return "Inválido"
+
+    const dateObj = new Date(milis);
+    return `${dateObj.getDate()}/${dateObj.getMonth()+1}/${dateObj.getFullYear()}`
 }
