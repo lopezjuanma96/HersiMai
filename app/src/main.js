@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/list_user', listUserHandler)
+app.get('/api/list_user/export', listUserHandler)
 app.post('/api/new_user', newUserHandler)
 
 PORT=8080

@@ -1,6 +1,5 @@
 CRUCIALES
 - Crear frontend y backend de el detalle de usuario
-- En backend lista de usuarios agregar endpoint para exportar JSON.
 
 RETOQUES
 - Agregar Regex a los input y al submit button del frontend y el backend new_user.

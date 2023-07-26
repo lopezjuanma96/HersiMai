@@ -1,4 +1,4 @@
-const { readUserListFile } = require('./files.js')
+const { getUserListFilePath, readUserListFile } = require('./files.js')
 
 const listUserHandler = (req, res) => {
     res.status(200).send({
@@ -6,6 +6,11 @@ const listUserHandler = (req, res) => {
         code: 'success',
         msg: "Se devuelve la lista de usuarios correctamente."
     })
+}
+
+const exportUserListHandler = (req, res) => {
+    // HERE TRANSFORM DATA TO OTHER FILE TYPE AND EXPORT
+    res.status(200).download(getUserListFilePath())
 }
 
 const getUserListArr = () => {

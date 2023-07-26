@@ -1,6 +1,8 @@
 const { readFileSync, writeFileSync } = require("fs");
 const USER_LIST_PATH = __dirname + "/../data/user_list.json"
 
+const getUserListFilePath = () => USER_LIST_PATH;
+
 const readUserListFile = () => {
     const fileText = readFileSync(USER_LIST_PATH, { encoding : "utf-8"}); // this only reads the text in the file
     if (fileText === "") return {}
@@ -12,4 +14,4 @@ const saveUserListFile = (userList) => {
     writeFileSync(USER_LIST_PATH, fileText, {encoding: "utf-8"})
 }
 
-module.exports = { readUserListFile, saveUserListFile }
+module.exports = { getUserListFilePath, readUserListFile, saveUserListFile }
