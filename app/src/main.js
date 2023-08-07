@@ -1,7 +1,9 @@
 const express = require("express");
 
 const { newUserHandler } = require("./handlers/new_user.js");
-const { listUserHandler } = require("./handlers/list_user.js")
+const { listUserHandler, exportUserListHandler } = require("./handlers/list_user.js");
+const { userDetailHandler } = require("./handlers/user_detail.js")
+
 
 const app = express(); // app contiene nuestro servidor
 
@@ -15,7 +17,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/list_user', listUserHandler)
-app.get('/api/list_user/export', listUserHandler)
+app.get('/api/list_user/export', exportUserListHandler)
+app.get('/api/user_detail', userDetailHandler)
 app.post('/api/new_user', newUserHandler)
 
 PORT=8080

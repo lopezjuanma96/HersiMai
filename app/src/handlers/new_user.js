@@ -3,6 +3,8 @@ const { readUserListFile, saveUserListFile } = require('./files.js')
 const newUserHandler = (req, res) => {
     const newUser = req.body;
     newUser.creationDate = Date.now();
+    newUser.evalName = "Pedro Mangi"; //HERE: when eval login is done, get info from session.
+
     // DATA VALILDATION
     const userList = readUserListFile();
     if (userAlreadyExists(newUser, userList)) return res.status(409).send({code:"user-exists", msg:"El usuario ya existe en la base de datos."})

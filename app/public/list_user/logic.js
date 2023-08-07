@@ -1,6 +1,8 @@
 const listTableBody = document.getElementById('listTableBody')
 const noDataTableBody = document.getElementById('noDataTableBody')
 
+if (window.location.search !== "") window.location.search = "";
+
 listTableBody.innerHTML = "";
 fetch('/api/list_user', {
     method: "GET",

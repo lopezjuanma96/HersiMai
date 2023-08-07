@@ -23,4 +23,4 @@ const getUserListArr = () => {
     return userListArr
 }
 
-module.exports = { listUserHandler }
+module.exports = { listUserHandler, exportUserListHandler }

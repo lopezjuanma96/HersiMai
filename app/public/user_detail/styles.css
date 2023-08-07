@@ -1,0 +1,65 @@
+body {
+    background-color: #FF7A00;
+}
+
+a {
+    text-decoration: none;
+    color: #FF7A00;
+}
+
+.orangeButton {
+    background-color: #FF7A00;
+    border-color: #FF7A00;
+}
+
+.orangeButton:hover {
+    background-color: #FF7A00;
+    border-color: #FF7A00;
+    opacity: 70%;
+}
+
+.blueButton {
+    background-color: #3700ff;
+    border-color: #3700ff;
+}
+
+.blueButton:hover {
+    background-color: #3700ff;
+    border-color: #3700ff;
+    opacity: 70%;
+}
+
+.grayButton {
+    background-color: gray;
+    border-color: gray;
+}
+
+.grayButton:hover {
+    background-color: gray;
+    border-color: gray;
+    cursor: not-allowed;
+}
+
+.bgdGray {
+    background-color: gray;
+}
+
+.textRed {
+    color: red;
+}
+
+.textYellow {
+    color: yellow;
+}
+
+.textGreen {
+    color: green;
+}
+
+#mainBlock {
+    background-color: white;
+}
+
+#titleBlockEvalName {
+    font-weight: normal;
+}

@@ -1,5 +1,9 @@
 CRUCIALES
-- Crear frontend y backend de el detalle de usuario
+- front y backend de los formularios (tanto formualrios como reportes).
+- front y backend de los interactivos.
+- Crear frontend y backend de la lista de evaluaciones en el detalle de usuario (tienen que estar listos los resultados de al menos una de cada una).
+- Agregar revision de estado del proceso en el detalle de usuario. (tiene que estar el front y back de la lista de evaluaciones).
+- Agregar en creacion de usuario el nombre del gestor a partir de la sesión (tiene que estar el gestor de sesiones de gestores/evaluadores).
 
 RETOQUES
 - Agregar Regex a los input y al submit button del frontend y el backend new_user.
