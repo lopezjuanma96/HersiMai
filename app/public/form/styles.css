@@ -1,0 +1,34 @@
+body {
+    background-color: #FF7A00;
+}
+
+a {
+    text-decoration: none;
+    color: #FF7A00;
+}
+
+.orangeButton {
+    background-color: #FF7A00;
+    border-color: #FF7A00;
+}
+
+.orangeButton:hover {
+    background-color: #FF7A00;
+    border-color: #FF7A00;
+    opacity: 70%;
+}
+
+.redButton {
+    background-color: #e71616;
+    border-color: #e71616;
+}
+
+.redButton:hover {
+    background-color: #e71616;
+    border-color: #e71616;
+    opacity: 70%;
+}
+
+#mainBlock {
+    background-color: white;
+}

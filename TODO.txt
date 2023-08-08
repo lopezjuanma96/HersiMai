@@ -1,5 +1,5 @@
 CRUCIALES
-- front y backend de los formularios (tanto formualrios como reportes).
+- front y backend de los formularios (tanto formualrios como reportes). DEL FRONT FALTA RELLENAR PREGUNTAS Y COMPLETAR ENVÍO DE RESPUESTA, DEL BACK FALTA COMPLETAR RECEPCION DE RESPUESTA
 - front y backend de los interactivos.
 - Crear frontend y backend de la lista de evaluaciones en el detalle de usuario (tienen que estar listos los resultados de al menos una de cada una).
 - Agregar revision de estado del proceso en el detalle de usuario. (tiene que estar el front y back de la lista de evaluaciones).
@@ -12,5 +12,6 @@ RETOQUES
 - En frontend lista de usuarios agregar un dato cualitativo (por ejemplo porcentaje de completado) de los procesos de ese usuario.
 - En frontend lista de usuarios agregar buscador por nombre (capaz por algo más).
 - En frontend lista de usuarios agregar ordenador por nombre y fecha (capaz por algo más).
+- Guardar Respuestas a los formularios en proceso (que el botón Enviar solo lo de por completado, pero que se guarden en cada pregunta respondida)
 
 PROBAMOS: LUNES esquematizat basico el front y el back + full Front End. MIERCOLES: full back end + retoques.
