@@ -18,42 +18,16 @@
         </div>
         <div class="row pt-3" id="formBlock">
             <form class="container" id="questionsForm">
-                <div class="row mb-3">
-                    <label for="example-radio" class="form-label">Ejemplo SiNo</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="example-radio" id="example-radio-yes">
-                        <label class="form-check-label" for="example-radio-yes">
-                            Sí
-                        </label>
+                <div id="questionsList"></div>
+                <div class="row justify-content-end pt-3" id="buttonBlock">
+                    <div class="col-2" id="exportButtonBlock">
+                        <button class="w-100 btn btn-primary redButton" type="reset">Borrar</button>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="example-radio" id="example-radio-no">
-                        <label class="form-check-label" for="example-radio-no">
-                            No
-                        </label>
+                    <div class="col-2" id="newUserButtonBlock">
+                        <button class="w-100 btn btn-primary orangeButton" type="button">Enviar</button>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="example-range" class="form-label">Ejemplo Rango</label>
-                    <div class="d-flex flex-row align-items-center">
-                        <input type="range" class="form-range" min="0" max="3" step="1" id="example-range" aria-describedby="example-range-help">
-                        <label class="ms-3 h5" id="example-range-value">3</label>
-                    </div>
-                    <div id="example-range-help" class="form-text">Esta es la ayuda.</div>
-                </div>
-                <div class="row mb-3">
-                    <label for="example-text" class="form-label">Ejemplo Texto</label>
-                    <textarea class="form-control" id="example-text" rows="3"></textarea>
                 </div>
             </form>
-        </div>
-        <div class="row justify-content-end pt-3" id="buttonBlock">
-            <div class="col-2" id="newUserButtonBlock">
-                <a class="w-100 btn btn-primary orangeButton" target="_blank">Enviar</a>
-            </div>
-            <div class="col-2" id="exportButtonBlock">
-                <a class="w-100 btn btn-primary redButton" target="_blank">Borrar</a>
-            </div>
         </div>
     </div>
 
