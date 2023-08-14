@@ -1,4 +1,4 @@
-const { readFileSync, writeFileSync } = require("fs");
+const { readFileSync, writeFileSync, existsSync, mkdirSync } = require("fs");
 
 const DATA_DIR = __dirname + "/../data"
 const USER_LIST_PATH = __dirname + "/../data/user_list.json"
@@ -7,40 +7,67 @@ const FORMS_DIR = __dirname + "/../data/forms"
 const getUserListFilePath = () => USER_LIST_PATH;
 
 const readUserListFile = () => {
-    const fileText = readFileSync(USER_LIST_PATH, { encoding : "utf-8"}); // this only reads the text in the file
-    if (fileText === "") return {}
-    return JSON.parse(fileText) || {}; // now we make Node understand what that text means
+    try {
+        const fileText = readFileSync(getUserListFilePath(), { encoding : "utf-8"}); // this only reads the text in the file
+        if (fileText === "") return {}
+        return JSON.parse(fileText) || {}; // now we make Node understand what that text means
+    } catch (e) {
+        if (e.code === "ENOENT") return {};
+        else throw e;
+    }
 }
 
 const saveUserListFile = (userList) => {
     const fileText = JSON.stringify(userList) // de-understand the userList back into a string of text in the JSON format
-    writeFileSync(USER_LIST_PATH, fileText, {encoding: "utf-8"})
+    checkMakeDirs(getUserListFilePath());
+    writeFileSync(getUserListFilePath(), fileText, {encoding: "utf-8"})
 }
 
 const getFormFilePath = (formId) => `${FORMS_DIR}/${formId}.json`;
 
 const readFormFile = (formId) => {
-    const fileText = readFileSync(getFormFilePath(formId), { encoding : "utf-8"});
-    if (fileText === "") return {}
-    return JSON.parse(fileText) || {};
+    try {    
+        const fileText = readFileSync(getFormFilePath(formId), { encoding : "utf-8"});
+        if (fileText === "") return {}
+        return JSON.parse(fileText) || {};
+    } catch (e) {
+        if (e.code === "ENOENT") return {};
+        else throw e;
+    }
 }
 
 const saveFormFile = (formId, form) => {
-    const fileText = JSON.stringify(form)
+    const fileText = JSON.stringify(form);
+    checkMakeDirs(getFormFilePath(formId));
     writeFileSync(getFormFilePath(formId), fileText, {encoding: "utf-8"});
 }
 
 const getFormAnswersFilePath = (formId, code) => `${DATA_DIR}/${code}_answers/${code}_${formId}_answers.json` 
 
 const readFormAnswersFile = (formId, code) => {
-    const fileText = readFileSync(getFormAnswersFilePath(formId, code), { encoding : "utf-8"});
-    if (fileText === "") return [];
-    return JSON.parse(fileText) || [];
+    try {
+        const fileText = readFileSync(getFormAnswersFilePath(formId, code), { encoding : "utf-8"});
+        if (fileText === "") return [];
+        return JSON.parse(fileText) || [];
+    } catch (e) {
+        if (e.code === "ENOENT") return [];
+        else throw e;
+    }
 }
 
 const saveFormAnswersFile = (formId, code, answers) => {
-    const fileText = JSON.stringify(answers)
-    writeFileSync(getFormAnswersFilePath(formId, code), fileText, {encoding: "utf-8"})
+    const fileText = JSON.stringify(answers);
+    checkMakeDirs(getFormAnswersFilePath(formId, code));
+    writeFileSync(getFormAnswersFilePath(formId, code), fileText, {encoding: "utf-8"});
+}
+
+const checkMakeDirs = (path) => {
+    const dirs = path.split("/");
+    let dir = "";
+    for (let i = 0; i < dirs.length - 1; i++) {
+        dir += dirs[i] + "/";
+        if (!existsSync(dir)) mkdirSync(dir);
+    }
 }
 
 module.exports = {

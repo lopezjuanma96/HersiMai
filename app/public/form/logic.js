@@ -2,6 +2,8 @@ const queryParams = window.location.search;
 
 const title = document.getElementById("title")
 const questionsList = document.getElementById("questionsList");
+const questionsFormSubmitButton = document.getElementById("questionsFormSubmitButton");
+const questionsFormResetButton = document.getElementById("questionsFormResetButton");
 
 fetch(`/api/form${queryParams}`, {
     method: "GET",
@@ -21,9 +23,13 @@ fetch(`/api/form${queryParams}`, {
     const formData = resJson.data;
     
     // Title
-    if (formData.title && formData.title.length > 0) title.innerText = formData.title;
-    else title.innerText = "Formulario sin título."
-
+    if (formData.title && formData.title.length > 0) {
+        title.innerText = formData.title;
+        document.title = formData.title;
+    } else {
+        title.innerText = "Formulario sin título.";
+        document.title = "Formulario sin título.";
+    }
     // Questions
     questionsList.innerHTML = "";
     var q_index = 0; 
@@ -92,3 +98,57 @@ const renderRangeQuestion = (question, index) => {
     </div>
     `;
 }
+
+questionsFormSubmitButton.addEventListener('click', (e) => {
+    var q_index = 0, q_label, q_quest, q_input, q_input_y, q_input_n;
+    const answers = [];
+    var valid = true;
+    do {
+        q_label = document.getElementById(`question${q_index}Label`);
+        if (!q_label) break;
+        q_quest = q_label.innerText;
+        q_input = document.getElementById(`question${q_index}Input`);
+        q_input_y = document.getElementById(`question${q_index}InputYes`);
+        q_input_n = document.getElementById(`question${q_index}InputNo`);
+        if (q_input) {
+            answers.push({question: q_quest, answer: q_input.value});
+        } else if (q_input_y && q_input_n) {
+            if (q_input_y.checked) answers.push({question: q_quest, answer: "Sí"});
+            else if (q_input_n.checked) answers.push({question: q_quest, answer: "No"});
+            else {
+                alert(`La pregunta ${q_quest} no ha sido respondida.`);
+                valid = false;
+                break;
+            }
+        }
+        q_index ++;
+    } while (q_input || (q_input_y && q_input_n))
+    if (!valid) return;
+    
+    questionsFormSubmitButton.disabled = true;
+    questionsFormResetButton.disabled = true;
+    fetch(`/api/form/answer${queryParams}`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify({answers})
+    }).then((res) =>
+        res.json()
+    ).then((resJson) => {
+        questionsFormSubmitButton.disabled = false;
+        questionsFormResetButton.disabled = false;
+        questionsFormResetButton.click();
+        if (resJson.code !== "success") {
+            console.log(resJson.code, resJson.msg);
+            return alert(resJson.msg);
+        }
+        alert("Respuestas enviadas correctamente.");
+    }).catch((err) => {
+        console.log(err);
+        alert("Ha ocurrido un error al enviar las respuestas. Intente nuevamente.");
+        questionsFormSubmitButton.disabled = false;
+        questionsFormResetButton.disabled = false;
+    })
+})

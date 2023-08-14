@@ -46,7 +46,7 @@ const newAnswerFormHandler = (req, res) => {
     const formData = readFormAnswersFile(formId, code);
     const answers = formData || [];
 
-    answers.push({answers: data, date: new Date(), state:'complete'});
+    answers.push({...data, date: new Date(Date.now()).getTime(), state:'complete'});
 
     saveFormAnswersFile(formId, code, answers);
 
