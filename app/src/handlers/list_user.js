@@ -2,7 +2,7 @@ const { getUserListFilePath, readUserListFile } = require('./files.js')
 
 const listUserHandler = (req, res) => {
     res.status(200).send({
-        users: getUserListArr(),
+        data: getUserListArr(),
         code: 'success',
         msg: "Se devuelve la lista de usuarios correctamente."
     })

@@ -4,7 +4,7 @@ const userDetailHandler = (req, res) => {
     const userCode = req.query.code;
     const userDetail = getUserDetail(userCode);
     if (userDetail) return res.status(200).send({
-            user: userDetail,
+            data: userDetail,
             code: 'success',
             msg: "Se devuelve el detalle del usuario " + userCode + " correctamente." 
         })

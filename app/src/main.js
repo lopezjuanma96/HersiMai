@@ -4,7 +4,7 @@ const { newUserHandler } = require("./handlers/new_user.js");
 const { listUserHandler, exportUserListHandler } = require("./handlers/list_user.js");
 const { userDetailHandler } = require("./handlers/user_detail.js");
 
-const { getFormHandler, newFormHandler, getAnswerFormHandler, newAnswerFormHandler } = require("./handlers/forms.js");
+const { listFormsHandler, getFormHandler, newFormHandler, getAnswerFormHandler, newAnswerFormHandler } = require("./handlers/forms.js");
 
 
 const app = express(); // app contiene nuestro servidor
@@ -23,6 +23,7 @@ app.get('/api/list_user/export', exportUserListHandler)
 app.get('/api/user_detail', userDetailHandler)
 app.post('/api/new_user', newUserHandler)
 
+app.get('/api/form/list', listFormsHandler)
 app.get('/api/form', getFormHandler)
 app.post('/api/form', newFormHandler)
 

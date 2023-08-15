@@ -1,12 +1,24 @@
-const { readFormFile, readFormAnswersFile, saveFormAnswersFile } = require("./files.js")
+const { readFormFile, listFormFiles, readFormAnswersFile, saveFormAnswersFile } = require("./files.js")
 
 // FORMS
+
+const listFormsHandler = (req, res) => {
+    const forms = listFormFiles();
+
+    if (!forms || forms.length === 0) return res.status(404).send({code: 'forms-not-found', msg: "No se encontraron formularios."})
+
+    return res.status(200).send({
+        code: 'success',
+        data: forms,
+        msg: "Se devuelven los formularios correctamente."
+    })
+}
 
 const getFormHandler = (req, res) => {
     const formId = req.query.fid;
     const formData = readFormFile(formId);
     
-    if (formData === {}) return res.status(404).send({code: 'form-not-found', msg: `El formulario ${formId} no se encontró`})
+    //if (formData === {}) return res.status(404).send({code: 'form-not-found', msg: `El formulario ${formId} no se encontró`})
     
     return res.status(200).send({
         code: 'success',
@@ -29,7 +41,7 @@ const getAnswerFormHandler = (req, res) => {
     const formData = readFormAnswersFile(formId, code);
     const answers = formData || [];
 
-    if (answers.length === 0) return res.status(404).send({code: 'form-not-found', msg: `El formulario ${formId} no se encontró`})
+    //if (answers.length === 0) return res.status(404).send({code: 'form-not-found', msg: `El formulario ${formId} no se encontró`})
 
     return res.status(200).send({
         code: 'success',
@@ -57,4 +69,4 @@ const newAnswerFormHandler = (req, res) => {
     })
 }
 
-module.exports = { getFormHandler, newFormHandler, getAnswerFormHandler, newAnswerFormHandler }
+module.exports = { listFormsHandler, getFormHandler, newFormHandler, getAnswerFormHandler, newAnswerFormHandler }

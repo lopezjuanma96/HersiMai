@@ -13,8 +13,8 @@ fetch('/api/list_user', {
     respText.json()
 ).then((respJson) => {
     if (respJson.code == 'success'){
-        const users = respJson.users;
-        if (respJson.users.length == 0) return noDataTableBody.hidden = false;
+        const users = respJson.data;
+        if (users.length == 0) return noDataTableBody.hidden = false;
         for (let user of users) {
             listTableBody.innerHTML += formatUserJson(user)
         }

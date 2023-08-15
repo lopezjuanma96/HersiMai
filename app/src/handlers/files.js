@@ -1,4 +1,4 @@
-const { readFileSync, writeFileSync, existsSync, mkdirSync } = require("fs");
+const { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } = require("fs");
 
 const DATA_DIR = __dirname + "/../data"
 const USER_LIST_PATH = __dirname + "/../data/user_list.json"
@@ -21,6 +21,18 @@ const saveUserListFile = (userList) => {
     const fileText = JSON.stringify(userList) // de-understand the userList back into a string of text in the JSON format
     checkMakeDirs(getUserListFilePath());
     writeFileSync(getUserListFilePath(), fileText, {encoding: "utf-8"})
+}
+
+const getFormFileDir = () => FORMS_DIR;
+
+const listFormFiles = () => {
+    try {
+        const files = readdirSync(getFormFileDir());
+        return files.map(file => file.replace(".json", ""));
+    } catch (e) {
+        if (e.code === "ENOENT") return [];
+        else throw e;
+    }
 }
 
 const getFormFilePath = (formId) => `${FORMS_DIR}/${formId}.json`;
@@ -71,7 +83,8 @@ const checkMakeDirs = (path) => {
 }
 
 module.exports = {
-    getUserListFilePath, readUserListFile, saveUserListFile, 
+    getUserListFilePath, readUserListFile, saveUserListFile,
+    getFormFileDir, listFormFiles,
     getFormFilePath, readFormFile, saveFormFile,
     getFormAnswersFilePath, readFormAnswersFile, saveFormAnswersFile
 }

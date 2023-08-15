@@ -1,11 +1,15 @@
 CRUCIALES
-- front y backend de los formularios (tanto formualrios como reportes). DEL FRONT FALTA RELLENAR PREGUNTAS Y COMPLETAR ENVÍO DE RESPUESTA, DEL BACK FALTA COMPLETAR RECEPCION DE RESPUESTA
 - front y backend de los interactivos.
+- front y backend de resultados. FALTA RELLENAR DATOS DEL NOMBRE DEL USUARIO Y NOMBRE DE LA EVALUACION.
 - Crear frontend y backend de la lista de evaluaciones en el detalle de usuario (tienen que estar listos los resultados de al menos una de cada una).
 - Agregar revision de estado del proceso en el detalle de usuario. (tiene que estar el front y back de la lista de evaluaciones).
 - Agregar en creacion de usuario el nombre del gestor a partir de la sesión (tiene que estar el gestor de sesiones de gestores/evaluadores).
 
 RETOQUES
+- Aregar alerta de "copiado!" en los botones de copia. (https://getbootstrap.com/docs/5.2/components/alerts/)
+- front y backend de "Crear nuevos formularios".
+- Al finalizar un formulario/reporte enviar a una página de "success" con un link de vuelta al detalle del usuario.
+- Agregar "reportes anteriores" en /results
 - Agregar Regex a los input y al submit button del frontend y el backend new_user.
 - Agregar funcionalidad al botón de copiar código de usuario generado en new_user.
 - En backend lista de usuarios agregar endpoint para exportar Excel u otro formato de tabla.
