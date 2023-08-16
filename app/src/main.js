@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false}))
 app.use(express.json())
 
 app.get('/', (req, res) => {
-    res.send("Hola papá")
+    res.redirect("/list_user")
 })
 
 app.get('/api/list_user', listUserHandler)
