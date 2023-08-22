@@ -1,0 +1,47 @@
+{
+    "title": "Evaluación Motriz",
+    "type": "report",
+    "fid": "motG01",
+    "questions": [
+        {
+            "type": "yesno",
+            "question": "¿Se tiene certeza de que la persona pueda usar una pantalla táctil?"
+        },
+        {
+            "type": "range",
+            "question": "Califique su capacidad de movimiento de dedos:",
+            "min": 0,
+            "max": 3,
+            "step": 1,
+            "help": "Otorgue un valor de 0 a 3, donde 0 es nulo y 3 es completo."
+        },
+        {
+            "type": "range",
+            "question": "Califique su capacidad de movimiento de manos:",
+            "min": 0,
+            "max": 3,
+            "step": 1,
+            "help": "Otorgue un valor de 0 a 3, donde 0 es nulo y 3 es completo."
+        },
+        {
+            "type": "range",
+            "question": "Califique su capacidad de movimiento de cabeza:",
+            "min": 0,
+            "max": 3,
+            "step": 1,
+            "help": "Otorgue un valor de 0 a 3, donde 0 es nulo y 3 es completo."
+        },
+        {
+            "type": "range",
+            "question": "Califique su capacidad de movimiento de ojos:",
+            "min": 0,
+            "max": 3,
+            "step": 1,
+            "help": "Otorgue un valor de 0 a 3, donde 0 es nulo y 3 es completo."
+        },
+        {
+            "type": "text",
+            "question": "Observaciones:"
+        }
+    ]
+}
