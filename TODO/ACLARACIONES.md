@@ -1,0 +1,2 @@
+- en inter/motor01
+- - Los tamaños del espacio de juego y los circulos se establecen al clickear "Comenzar" o "Reintentar". Si se cambia la resolución de la pantalla (por ejemplo al rotar el celu) entre medio de un juego, esperar a que este termine y clickear "Reintentar" o actualizar la página. 

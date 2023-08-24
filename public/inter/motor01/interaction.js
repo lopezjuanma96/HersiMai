@@ -1,10 +1,14 @@
+////////////////////
+// IMPORTS & DOMS //
+////////////////////
+
 const canvasBlock = document.getElementById("canvasBlock");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-const CIRCLE_RADIUS = 100;
-const NUM_CIRCLES = 10;
-const CIRCLE_TIMEOUT_MILIS = 2000;
+/////////////
+// CLASSES //
+/////////////
 
 class circle {
     constructor(x, y, radius, color) {
@@ -78,12 +82,9 @@ class circle {
     }
 }
 
-//console.log(canvas.width, canvas.height, canvasBlock.clientWidth, canvasBlock.clientHeight)
-canvas.width = 0.9*canvasBlock.clientWidth;
-canvas.height = 0.9* canvasBlock.clientHeight;
-//console.log(canvas.width, canvas.height, canvasBlock.clientWidth, canvasBlock.clientHeight)
-
-const circles = []
+///////////////
+// FUNCTIONS //
+///////////////
 
 const getCircleX = () => {
     /**
@@ -103,11 +104,21 @@ const getCircleY = () => {
     return Math.random() * (canvas.height - 2 * CIRCLE_RADIUS) + CIRCLE_RADIUS;
 }
 
+const getCircleRadius = () => {
+    /**
+     * Gets the radius for the circle scaled to the canvas size
+     */
+    return Math.min(Math.max(Math.min(canvas.width, canvas.height) / 4, MIN_CIRCLE_RADIUS), MAX_CIRCLE_RADIUS);
+}
+
 const startInteraction = () => {
     /**
      * Called when the user starts interacting with the canvas
     */
     console.log("Started interaction");
+    canvas.width = 0.9*canvasBlock.clientWidth;
+    canvas.height = 0.9* canvasBlock.clientHeight;
+    CIRCLE_RADIUS = getCircleRadius();
     circleTimeout();
 }
 
@@ -147,6 +158,10 @@ const circleTimeout = () => {
     }
 }
 
+///////////////
+// LISTENERS //
+///////////////
+
 canvas.addEventListener("click", e => {
     /**
      * Called when the canvas is clicked
@@ -155,3 +170,20 @@ canvas.addEventListener("click", e => {
 
     circles[circles.length - 1].attempt(e.offsetX, e.offsetY);
 });
+
+/////////////
+// PROCESS //
+/////////////
+
+const MIN_CIRCLE_RADIUS = 25;
+const MAX_CIRCLE_RADIUS = 100;
+var CIRCLE_RADIUS = getCircleRadius();
+const NUM_CIRCLES = 10;
+const CIRCLE_TIMEOUT_MILIS = 2000;
+
+//console.log(canvas.width, canvas.height, canvasBlock.clientWidth, canvasBlock.clientHeight)
+canvas.width = 0.9*canvasBlock.clientWidth;
+canvas.height = 0.9* canvasBlock.clientHeight;
+//console.log(canvas.width, canvas.height, canvasBlock.clientWidth, canvasBlock.clientHeight)
+
+const circles = []
