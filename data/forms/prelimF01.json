@@ -3,5 +3,63 @@
     "type": "form",
     "fid": "prelimF01",
     "questions": [
+        {
+            "type": "title",
+            "question": "Datos del Profesional:"
+        },
+        {
+            "type": "text",
+            "question": "Nombre del Profesional:",
+            "id": "YmI90xIM"
+        },
+        {
+            "type": "text",
+            "question": "Correo del Profesional:",
+            "id": "_qM8Tp1q"
+        },
+        {
+            "type": "title",
+            "question": "Datos del Usuario:"
+        },
+        {
+            "type": "yesno",
+            "question": "¿Presenta discapacidad motriz?",
+            "id": "FWNxptRX"
+        },
+        {
+            "type": "yesno",
+            "question": "¿Puede usar el teléfono celular sólo?",
+            "id": "9_P5c3Gg"
+        },
+        {
+            "type": "yesno",
+            "question": "¿Puede señalar con el dedo?",
+            "id": "nmJlimLn"
+        },
+        {
+            "type": "option",
+            "question": "¿Qué tipo de movimiento posee en los miembros superiores?",
+            "options": [
+                "Sin movimientos / Movimientos Involuntarios",
+                "Movimientos Voluntarios"
+            ],
+            "id": "KcRqhO5B"
+        },
+        {
+            "type": "yesno",
+            "question": "¿Puede mover la cabeza con movimientos controlados?",
+            "id": "FVJTJmp2"
+        },
+        {
+            "type": "option",
+            "question": "Desea trabajar en:",
+            "options": [
+                "CAA",
+                "CyE",
+                "Inserción Laboral / Ocio",
+                "Tablero físico + Pictos"
+            ],
+            "id": "sWt_RrN8"
+        }
     ]
 }

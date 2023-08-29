@@ -1,6 +1,8 @@
 CRUCIALES
 - Agregar interactivos EM0 y EM1.
 - Agregar en creacion de usuario el nombre del gestor a partir de la sesión (tiene que estar el gestor de sesiones de gestores/evaluadores).
+- Agregar "Eliminar datos" en resultados, usuario y lista de usuarios. Que vaya a una página que pida un código por ahora harcodeado.
+Que haga un request a la API con los query params desde donde haya hecho el click de "borrar datos" originalmente y a partir de cuales datos pasó borre una cosa u otra.
 
 RETOQUES
 - Aregar alerta de "copiado!" en los botones de copia. (https://getbootstrap.com/docs/5.2/components/alerts/)

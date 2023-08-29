@@ -4,34 +4,86 @@
     "fid": "prevalF",
     "questions": [
         {
-            "question": "Titulo",
             "type": "title",
-            "id": "pnVAzlL2"
+            "question": "Información sobre el caregiver"
         },
         {
-            "question": "Hola hola",
+            "type": "text",
+            "question": "Nombre del caregiver:",
+            "id": "s0dPrDz1"
+        },
+        {
+            "type": "text",
+            "question": "Vínculo del caregiver:",
+            "id": "fU-XcXNU"
+        },
+        {
+            "type": "text",
+            "question": "Teléfono del caregiver:",
+            "id": "90NNk6KN"
+        },
+        {
+            "type": "text",
+            "question": "Correo del caregiver:",
+            "id": "i0tBE9fQ"
+        },
+        {
+            "type": "text",
+            "question": "Ciudad/Provincia del caregiver:",
+            "id": "-OR65ffb"
+        },
+        {
             "type": "option",
+            "question": "Nombre del caregiver:",
             "options": [
-                "uno",
-                "dos",
-                "tres"
+                "Particular",
+                "Obra Social"
             ],
-            "id": "QCQgrj9x"
+            "id": "w7OHY9Nq"
         },
         {
-            "question": "Titulo",
+            "type": "text",
+            "question": "Nombre de la Obra Social:",
+            "id": "XelrEGd4"
+        },
+        {
             "type": "title",
-            "id": "Itaz72Vr"
+            "question": "Información sobre el usuario"
         },
         {
-            "question": "Hola hola",
-            "type": "option",
-            "options": [
-                "uno",
-                "dos",
-                "tres"
-            ],
-            "id": "rQmeI9vf"
+            "type": "text",
+            "question": "Nombre del usuario:",
+            "id": "hO9JWg_Q"
+        },
+        {
+            "type": "text",
+            "question": "Edad del usuario:",
+            "id": "C7WBPDGN"
+        },
+        {
+            "type": "text",
+            "question": "Fecha de nacimiento del usuario:",
+            "id": "t5Qv9mwG"
+        },
+        {
+            "type": "text",
+            "question": "Diagnostico Médico del usuario:",
+            "id": "kOdP0u1s"
+        },
+        {
+            "type": "text",
+            "question": "Terapias realizadas por el usuario:",
+            "id": "D85QAYaO"
+        },
+        {
+            "type": "text",
+            "question": "Nombre, profesión, contacto y matrícula del profesional que acompaña:",
+            "id": "sEDYN-B6"
+        },
+        {
+            "type": "yesno",
+            "question": "Consentimiento del caregiver para participar del proceso:",
+            "id": "AJoKVEEn"
         }
     ]
 }
