@@ -32,10 +32,13 @@ fetch(`/api/form${queryParams}`, {
     }
     // Questions
     questionsList.innerHTML = "";
-    var q_index = 0; 
+    var q_index = 0;
     for (q of formData.questions) {
         var questionText;
         switch (q.type) {
+            case "title":
+                questionText = renderTitleQuestion(q, q_index);
+                break;
             case "text":
                 questionText = renderTextQuestion(q, q_index);
                 break;
@@ -44,6 +47,9 @@ fetch(`/api/form${queryParams}`, {
                 break;
             case "range":
                 questionText = renderRangeQuestion(q, q_index);
+                break;
+            case "option":
+                questionText = renderOptionQuestion(q, q_index);
                 break;
             default:
                 break;
@@ -59,9 +65,10 @@ fetch(`/api/form${queryParams}`, {
 
 const renderTextQuestion = (question, index) => {
     return `
-    <div class="row mb-3">
-        <label for="example-text" class="form-label" id="question${index}Label">${question.question}</label>
-        <textarea class="form-control" id="question${index}Input" rows="3"></textarea>
+    <div class="row mb-3 ">
+        <label for="question${index}" class="form-label" qid="${question.id}">${question.question}</label>
+        <textarea class="form-control" qid="${question.id}" rows="3" name="question${index}"></textarea>
+        ${question.help ? `<div class="form-text" id="question${index}Help">${question.help}</div>` : ""}
     </div>
     `;
 }
@@ -71,17 +78,39 @@ const renderYesNoQuestion = (question, index) => {
     <div class="row mb-3">
         <label for="example-radio" class="form-label" id="question${index}Label">${question.question}</label>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="example-radio" id="question${index}InputYes">
-            <label class="form-check-label" for="example-radio-yes" id="question${index}LabelYes">
+            <input class="form-check-input" type="radio" name="question${index}" qid="${question.id}">
+            <label class="form-check-label" for="question${index}Y" qid="${question.id}">
                 Sí
             </label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="example-radio" id="question${index}InputNo">
-            <label class="form-check-label" for="example-radio-no"  id="question${index}LabelNo">
+            <input class="form-check-input" type="radio" name="question${index}" qid="${question.id}">
+            <label class="form-check-label" for="question${index}N"  qid="${question.id}">
                 No
             </label>
         </div>
+        ${question.help ? `<div class="form-text" id="question${index}Help">${question.help}</div>` : ""}
+    </div>
+    `;
+}
+
+const renderOptionQuestion = (question, index) => {
+    return `
+    <div class="row mb-3">
+        <label for="example-radio" class="form-label" id="question${index}Label">${question.question}</label>
+        ${
+            question.options.map(option =>
+                `
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="question${index}Y" qid="${question.id}">
+                    <label class="form-check-label" for="question${index}Y" qid="${question.id}">
+                        ${option}
+                    </label>
+                </div>
+                `
+            ).join("\n")
+        }
+        ${question.help ? `<div class="form-text" id="question${index}Help">${question.help}</div>` : ""}
     </div>
     `;
 }
@@ -89,41 +118,80 @@ const renderYesNoQuestion = (question, index) => {
 const renderRangeQuestion = (question, index) => {
     return `
     <div class="row mb-3">
-        <label for="example-range" class="form-label" id="question${index}Label">${question.question}</label>
+        <label for="example-range" class="form-label" qid="${question.id}">${question.question}</label>
         <div class="d-flex flex-row align-items-center">
-            <input type="range" class="form-range" value="${question.min}" min="${question.min}" max="${question.max}" step="${question.step}" id="question${index}Input" aria-describedby="question${index}Help" onchange="document.getElementById('question${index}InputValue').innerText = this.value">
-            <label class="ms-3 h5" id="question${index}InputValue">${question.min}</label>
+            <input type="range" class="form-range" value="${question.min}" min="${question.min}" max="${question.max}" step="${question.step}" qid="${question.id}" aria-describedby="question${index}Help" onchange="this.parentNode.getElementsByTagName('label')[0].innerText = this.value">
+            <label class="ms-3 h5">${question.min}</label>
         </div>
-        <div class="form-text" id="question${index}Help">${question.help}</div>
+        ${question.help ? `<div class="form-text" id="question${index}Help">${question.help}</div>` : ""}
     </div>
     `;
 }
 
+const renderTitleQuestion = (question, index) => {
+    return `
+    ${index !== 0 ? "<hr>" : ""}
+    <div class="row mb-3">
+        <p class="h3">${question.question}</p>
+        ${question.help ? `<div class="form-text" id="question${index}Help">${question.help}</div>` : ""}
+    </div>
+    `
+}
+
 questionsFormSubmitButton.addEventListener('click', (e) => {
-    var q_index = 0, q_label, q_quest, q_input, q_input_y, q_input_n;
     const answers = [];
-    var valid = true;
-    do {
-        q_label = document.getElementById(`question${q_index}Label`);
-        if (!q_label) break;
-        q_quest = q_label.innerText;
-        q_input = document.getElementById(`question${q_index}Input`);
-        q_input_y = document.getElementById(`question${q_index}InputYes`);
-        q_input_n = document.getElementById(`question${q_index}InputNo`);
-        if (q_input) {
-            answers.push({question: q_quest, answer: q_input.value});
-        } else if (q_input_y && q_input_n) {
-            if (q_input_y.checked) answers.push({question: q_quest, answer: "Sí"});
-            else if (q_input_n.checked) answers.push({question: q_quest, answer: "No"});
-            else {
-                alert(`La pregunta ${q_quest} no ha sido respondida.`);
-                valid = false;
-                break;
-            }
+
+    const questions = {};
+    const radioChecked = {};
+    var valid = false;
+    
+    const inputs = questionsList.getElementsByTagName('input');
+    for (let i=0; i < inputs.length; i++){
+        const thisInput = inputs.item(i);
+        const thisAnswer = {}
+
+        if (thisInput.type === 'radio'){
+            thisAnswer.id = thisInput.attributes.getNamedItem('qid').value;
+            thisAnswer.question = thisInput.parentNode.parentNode.getElementsByClassName('form-label')[0].innerText;
+            questions[thisAnswer.id] = thisAnswer.question;
+            if (!thisInput.checked){
+                const id = thisInput.attributes.getNamedItem('qid').value;
+                if (!radioChecked[id]) radioChecked[id] = false;
+                continue;
+            };
+            thisAnswer.answer = thisInput.parentNode.getElementsByClassName('form-check-label')[0].innerText;
+            radioChecked[thisAnswer.id] = true;
+        } else if (thisInput.type === 'range'){
+            thisAnswer.id = thisInput.attributes.getNamedItem('qid').value;
+            thisAnswer.question = thisInput.parentNode.parentNode.getElementsByClassName('form-label')[0].innerText;
+            questions[thisAnswer.id] = thisAnswer.question;
+            thisAnswer.answer = thisInput.value;
+        } else {
+            console.log('Invalid input type', thisInput.type, ':', thisInput)
         }
-        q_index ++;
-    } while (q_input || (q_input_y && q_input_n))
-    if (!valid) return;
+        answers.push(thisAnswer)
+    }
+    
+    const textareas = questionsList.getElementsByTagName('textarea');
+    for (let i=0; i < textareas.length; i++){
+        const thisInput = textareas.item(i);
+        const thisAnswer = {};
+        
+        thisAnswer.id = thisInput.attributes.getNamedItem('qid').value;
+        thisAnswer.question = thisInput.parentNode.getElementsByClassName('form-label')[0].innerText;
+        thisAnswer.answer = thisInput.value; 
+        answers.push(thisAnswer)
+    }
+
+    for (let id in radioChecked){
+        if (!radioChecked[id]){
+            alert('La pregunta ' + questions[id] + ' no fue respondida.')
+            valid = false;
+            return;
+        }
+    }
+    
+    // console.log(answers);
     
     questionsFormSubmitButton.disabled = true;
     questionsFormResetButton.disabled = true;

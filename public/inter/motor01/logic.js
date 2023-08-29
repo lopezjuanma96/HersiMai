@@ -43,7 +43,7 @@ const fillReport = () => {
     const hitRateQuestion = "Tasa de aciertos:";
     const attemptAvgQuestion = "Promedio de intentos:";
 
-    for (var c of circles){
+    for (var c of figures){
         if (c.hitted){
             hitCount++;
             attemptCount += c.hitAttempts; // only count attempts if the circle was hit
@@ -51,7 +51,7 @@ const fillReport = () => {
     }
 
     // Express hitRate as a percentage rounded to 2 decimals
-    const hitRate = `${(hitCount / circles.length * 100).toFixed(2)}%`
+    const hitRate = `${(hitCount / figures.length * 100).toFixed(2)}%`
     // Express attemptAvg as a decimal rounded to 2 decimals, if hitCount is 0 set to invalid
     const attemptAvg = hitCount > 0 ? (attemptCount / hitCount).toFixed(2) : 'inválido';
 

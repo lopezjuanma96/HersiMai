@@ -5,7 +5,8 @@
     "questions": [
         {
             "type": "yesno",
-            "question": "¿Se tiene certeza de que la persona pueda usar una pantalla táctil?"
+            "question": "¿Se tiene certeza de que la persona pueda usar una pantalla táctil?",
+            "id": "6HfEjGxM"
         },
         {
             "type": "range",
@@ -13,7 +14,8 @@
             "min": 0,
             "max": 3,
             "step": 1,
-            "help": "Otorgue un valor de 0 a 3, donde 0 es nulo y 3 es completo."
+            "help": "Otorgue un valor de 0 a 3, donde 0 es nulo y 3 es completo.",
+            "id": "rGSBgXyZ"
         },
         {
             "type": "range",
@@ -21,7 +23,8 @@
             "min": 0,
             "max": 3,
             "step": 1,
-            "help": "Otorgue un valor de 0 a 3, donde 0 es nulo y 3 es completo."
+            "help": "Otorgue un valor de 0 a 3, donde 0 es nulo y 3 es completo.",
+            "id": "IXCxqTcf"
         },
         {
             "type": "range",
@@ -29,7 +32,8 @@
             "min": 0,
             "max": 3,
             "step": 1,
-            "help": "Otorgue un valor de 0 a 3, donde 0 es nulo y 3 es completo."
+            "help": "Otorgue un valor de 0 a 3, donde 0 es nulo y 3 es completo.",
+            "id": "CX12yYIn"
         },
         {
             "type": "range",
@@ -37,11 +41,13 @@
             "min": 0,
             "max": 3,
             "step": 1,
-            "help": "Otorgue un valor de 0 a 3, donde 0 es nulo y 3 es completo."
+            "help": "Otorgue un valor de 0 a 3, donde 0 es nulo y 3 es completo.",
+            "id": "0pJGmuB7"
         },
         {
             "type": "text",
-            "question": "Observaciones:"
+            "question": "Observaciones:",
+            "id": "QFo2d1NS"
         }
     ]
 }

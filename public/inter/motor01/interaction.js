@@ -127,7 +127,7 @@ const restartInteraction = () => {
      * Called when the interaction is restarted
     */
     console.log("Restarted interaction");
-    circles.length = 0;
+    figures.length = 0;
     startInteraction();
 }
 
@@ -149,11 +149,11 @@ const circleTimeout = () => {
     //Clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    if (circles.length >= NUM_CIRCLES) {
+    if (figures.length >= NUM_CIRCLES) {
         endInteraction();
     } else {
-        circles.push(new circle(getCircleX(), getCircleY(), CIRCLE_RADIUS, "white"));
-        circles[circles.length - 1].draw();
+        figures.push(new circle(getCircleX(), getCircleY(), CIRCLE_RADIUS, "white"));
+        figures[figures.length - 1].draw();
         setTimeout(circleTimeout, CIRCLE_TIMEOUT_MILIS);
     }
 }
@@ -168,7 +168,7 @@ canvas.addEventListener("click", e => {
     */
     //console.log(e.offsetX, e.offsetY);
 
-    circles[circles.length - 1].attempt(e.offsetX, e.offsetY);
+    figures[figures.length - 1].attempt(e.offsetX, e.offsetY);
 });
 
 /////////////
@@ -186,4 +186,4 @@ canvas.width = 0.9*canvasBlock.clientWidth;
 canvas.height = 0.9* canvasBlock.clientHeight;
 //console.log(canvas.width, canvas.height, canvasBlock.clientWidth, canvasBlock.clientHeight)
 
-const circles = []
+const figures = []

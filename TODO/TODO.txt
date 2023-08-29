@@ -1,5 +1,4 @@
 CRUCIALES
-- front y backend de resultados. FALTA RELLENAR DATOS DEL NOMBRE DEL USUARIO Y NOMBRE DE LA EVALUACION.
 - Agregar interactivos EM0 y EM1.
 - Agregar en creacion de usuario el nombre del gestor a partir de la sesión (tiene que estar el gestor de sesiones de gestores/evaluadores).
 

@@ -4,12 +4,49 @@ const lastReportAnswers = document.getElementById("lastReportAnswers");
 const lastReportDate = document.getElementById("lastReportDate");
 const lastReportNotFound = document.getElementById("lastReportNotFound");
 
+const titleBlockUserName = document.getElementById("titleBlockUserName");
+const titleBlockTestName = document.getElementById("titleBlockTestName");
 const titleBlockEvalState = document.getElementById("titleBlockEvalState");
 
 const previousReportsAnswers = document.getElementById("previousReportsAnswers");
 const previousReportsNotFound = document.getElementById("previousReportsNotFound");
 
 const MULTILINE_ANSWER_CHAR_THRESH = 20;
+
+fetch(`/api/user_detail/${queryParams}`, {
+    method: "GET",
+    headers: {
+        "Accept": "application/json"
+    }
+}).then(res =>
+    res.json()    
+).then(resJson => {
+    if (resJson.code !== "success") {
+        console.log(resJson.code, resJson.msg);
+        return alert(resJson.msg);
+    }
+
+    const user = resJson.data;
+    titleBlockUserName.innerText = user.userName;
+})
+
+fetch(`/api/form/${queryParams}`, {
+    method: "GET",
+    headers: {
+        "Accept": "application/json"
+    }
+}).then(res => 
+    res.json()
+).then(resJson => {
+    if (resJson.code !== "success") {
+        console.log(resJson.code, resJson.msg);
+        return alert(resJson.msg);
+    }
+
+    const form = resJson.data;
+    titleBlockTestName.innerText = form.title;
+    document.title = "Resultados de: " + form.title;
+})
 
 fetch(`/api/form/answer/${queryParams}`, {
     method: "GET",
