@@ -1,5 +1,4 @@
 CRUCIALES
-- Agregar interactivo EM0 https://docs.google.com/document/d/1S_J1YNDKg2L-qBGUK0oV-SQa9Uxv30CuzAN8sE31dhM/edit
 - Agregar interactivo EM1. https://docs.google.com/document/d/1S_J1YNDKg2L-qBGUK0oV-SQa9Uxv30CuzAN8sE31dhM/edit
 - Agregar en creacion de usuario el nombre del gestor a partir de la sesión (tiene que estar el gestor de sesiones de gestores/evaluadores).
 - Agregar "Eliminar datos" en resultados, usuario y lista de usuarios. Que vaya a una página que pida un código por ahora harcodeado.
