@@ -6,6 +6,8 @@ const canvasBlock = document.getElementById("canvasBlock");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+const title = document.getElementById('title');
+
 /////////////
 // CLASSES //
 /////////////
@@ -151,12 +153,14 @@ const startTouchInteraction = () => {
      * The Touch stage lasts for TOUCH_MILIS miliseconds.
      */
     console.log("Started Touch interaction");
+    title.innerText = 'Prueba Táctil: Presiona los cuadrados';
     drawRectangles();
     setTimeout(endTouchInteraction, TOUCH_MILIS);
 }
 
 const startSweepInteraction = () => {
     console.log("Started Sweep interaction");
+    title.innerText = 'Prueba de Barrido: Presiona los cuadrados cuando se iluminen';
     drawRectangles();
     sweep();
 }
@@ -190,6 +194,7 @@ const endTouchInteraction = () => {
      * Called when the Touch stage ends.
      */
     console.log("Ended Touch interaction");
+    title.innerText = 'Presiona "Continuar" para continuar con la prueba de Barrido';
     STAGE = STAGES[1];
     middleStage();
 }
@@ -199,6 +204,7 @@ const endSweepInteraction = () => {
      * Called when the Sweep stage ends.
      */
     console.log("Ended Sweep interaction");
+    title.innerText = 'Presiona "Enviar" para enviar los resultados';
     endInteraction();
 }
 
@@ -367,6 +373,8 @@ var SWEEP_MISS = 0;
 
 canvas.width = 0.9*canvasBlock.clientWidth;
 canvas.height = 0.9* canvasBlock.clientHeight;
+
+title.innerText = 'Presiona "Comenzar" para iniciar la prueba Táctil';
 
 const figures = [
     new rectangle(10, 10, RECT_WIDTH, RECT_HEIGHT, "white"),

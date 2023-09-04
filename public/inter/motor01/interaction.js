@@ -6,6 +6,8 @@ const canvasBlock = document.getElementById("canvasBlock");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+const title = document.getElementById("title");
+
 /////////////
 // CLASSES //
 /////////////
@@ -116,6 +118,7 @@ const startInteraction = () => {
      * Called when the user starts interacting with the canvas
     */
     console.log("Started interaction");
+    title.innerText = "Presiona cada círculo cuando aparezca";
     canvas.width = 0.9*canvasBlock.clientWidth;
     canvas.height = 0.9* canvasBlock.clientHeight;
     CIRCLE_RADIUS = getCircleRadius();
@@ -136,6 +139,7 @@ const endInteraction = () => {
      * Called when the interaction is ended
     */
     console.log("Ended interaction");
+    title.innerText = 'Presiona "Enviar" para enviar los resultados';
     endGame();
 }
 
@@ -185,5 +189,7 @@ const CIRCLE_TIMEOUT_MILIS = 2000;
 canvas.width = 0.9*canvasBlock.clientWidth;
 canvas.height = 0.9* canvasBlock.clientHeight;
 //console.log(canvas.width, canvas.height, canvasBlock.clientWidth, canvasBlock.clientHeight)
+
+title.innerText = 'Presiona "Comenzar" para iniciar la prueba';
 
 const figures = []
