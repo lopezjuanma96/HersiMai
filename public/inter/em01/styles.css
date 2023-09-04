@@ -1,0 +1,64 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(15, 15, 17);
+    color: rgb(255, 255, 255);
+    width: 100%;
+    height: 100%;
+}
+
+button {
+    width: 60%;
+    min-width: 100px;
+    max-width: 200px;
+    height: 40px;
+    margin: 1%;
+    font-size: 16px;
+}
+
+button:hover {
+    opacity: 0.96;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+#mainBlock {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+#titleBlock {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+}
+
+#buttonBlock {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+}
+
+#canvasBlock {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+#canvas {
+    border: 1px solid rgb(255, 255, 255);
+    transition: background-color 0.3s ease-out;
+}
