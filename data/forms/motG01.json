@@ -1,53 +1,44 @@
 {
-    "title": "Evaluación Motriz",
+    "title": "Evaluación Motriz Preliminar",
     "type": "report",
     "fid": "motG01",
     "questions": [
         {
             "type": "yesno",
-            "question": "¿Se tiene certeza de que la persona pueda usar una pantalla táctil?",
-            "id": "6HfEjGxM"
+            "question": "¿Puede usar el teléfono celular sólo?",
+            "id": ""
         },
         {
-            "type": "range",
-            "question": "Califique su capacidad de movimiento de dedos:",
-            "min": 0,
-            "max": 3,
-            "step": 1,
-            "help": "Otorgue un valor de 0 a 3, donde 0 es nulo y 3 es completo.",
-            "id": "rGSBgXyZ"
+            "type": "yesno",
+            "question": "¿Puede señalar con el dedo?",
+            "id": ""
         },
         {
-            "type": "range",
-            "question": "Califique su capacidad de movimiento de manos:",
-            "min": 0,
-            "max": 3,
-            "step": 1,
-            "help": "Otorgue un valor de 0 a 3, donde 0 es nulo y 3 es completo.",
-            "id": "IXCxqTcf"
+            "type": "yesno",
+            "question": "¿Presenta algún rango de movimiento voluntario y controlado en MMSS?",
+         
+            "id": ""
         },
         {
-            "type": "range",
-            "question": "Califique su capacidad de movimiento de cabeza:",
-            "min": 0,
-            "max": 3,
-            "step": 1,
-            "help": "Otorgue un valor de 0 a 3, donde 0 es nulo y 3 es completo.",
-            "id": "CX12yYIn"
+            "type": "yesno",
+            "question": "¿Puede mover la cabeza con movimientos controlados?",
+            "id": ""
         },
         {
-            "type": "range",
-            "question": "Califique su capacidad de movimiento de ojos:",
-            "min": 0,
-            "max": 3,
-            "step": 1,
-            "help": "Otorgue un valor de 0 a 3, donde 0 es nulo y 3 es completo.",
-            "id": "0pJGmuB7"
+            "type": "option",
+            "question": "¿Posee alguna condición visual?",
+            "options": [
+                "Nistagmo",
+                "Otras",
+                "Ninguna",
+                "Sí, corregida"
+            ],
+            "id": ""
         },
         {
             "type": "text",
             "question": "Observaciones:",
-            "id": "QFo2d1NS"
+            "id": ""
         }
     ]
 }

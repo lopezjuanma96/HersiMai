@@ -1,0 +1,40 @@
+{
+    "title": "Evaluación Motriz NIVEL 3: OCCUS",
+    "type": "report",
+    "fid": "motG01",
+    "questions": [
+        {
+            "type": "title",
+            "question": "Se le solicitará a la persona mover la mirada por la pantalla siguiendo el recorrido mostrado por el video en el siguiente link",
+            "help": "link video",
+            "id": ""
+        },
+        {
+            "type": "yesno",
+            "question": "¿La persona puede mover la mirada hacia distintas direcciones?",
+            "help": "La respuesta será SÍ, si pudo mover la mirada hacia todas las esquinas de la pantalla y hacia el centro",
+            "id": ""
+        },
+        {
+            "type": "yesno",
+            "question": "¿La persona puede mantener la mirada en distintas posiciones?",
+            "help": "La respuesta será SÍ, si pudo mantener 3 segundos la mirada en todas las posiciones anteriores",
+            "id": ""
+        },
+        {
+            "type": "yesno",
+            "question": "¿La persona se cansa rápidamente o no puede mantener la posición durante los movimientos??",
+            "id": ""
+        },
+        {
+            "type": "yesno",
+            "question": "¿La persona tiene NISTAGMO o utiliza LENTES BIFOCALES?",
+            "id": ""
+        },
+        {
+            "type": "text",
+            "question": "Observaciones:",
+            "id": ""
+        }
+    ]
+}

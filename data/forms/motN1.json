@@ -1,0 +1,41 @@
+{
+    "title": "Evaluación Motriz NIVEL 1: PRESS AND PRESS",
+    "type": "report",
+    "fid": "motG01",
+    "questions": [
+        {
+            "type": "option",
+            "question": "¿Es capaz de ejercer una presión durante el tiempo suficiente?",
+            "options": [
+                "Sí, con ambas manos",
+                "Sí, pero solo con la derecha",
+                "Sí, pero solo con la izquierda",
+                "No"
+            ],
+            "help": "La respuesta será SÍ, si la tasa de aciertos obtenida en el juego es igual o mayor al 60%",
+            "id": ""
+        },
+        {
+            "type": "option",
+            "question": "¿Tiene presición en el movimiento?",
+            "options": [
+                "Sí, con ambas manos",
+                "Sí, pero solo con la derecha",
+                "Sí, pero solo con la izquierda",
+                "No"
+            ],
+            "help": "La respuesta será SÍ, si el promedio de intentos obtenido en el juego es menor a 2.",
+            "id": ""
+        },
+        {
+            "type": "yesno",
+            "question": "¿La persona se cansa rápidamente o no puede mantener la posición durante los movimientos??",
+            "id": ""
+        },
+        {
+            "type": "text",
+            "question": "Observaciones:",
+            "id": ""
+        }
+    ]
+}
