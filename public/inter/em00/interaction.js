@@ -107,6 +107,78 @@ class rectangle {
     }
 }
 
+class measures {
+    constructor() {
+        this.rightHits = 0;
+        this.leftHits = 0;
+        this.sweepHits = 0;
+        this.sweepMisses = 0;
+
+        this.rightTimes = [];
+        this.rightLastTime = 0;
+        this.leftTimes = [];
+        this.leftLastTime = 0;
+        this.sweepTimes = [];
+        this.sweepLastTime = 0;
+
+        this.rightHit =  function(){
+            this.rightHits++;
+            this.rightTimes.push(Date.now() - this.rightLastTime);
+            this.rightLastTime = Date.now();
+        }
+
+        this.leftHit = function(){
+            this.leftHits++;
+            this.leftTimes.push(Date.now() - this.leftLastTime);
+            this.leftLastTime = Date.now();
+        }
+
+        this.sweepHit = function(){
+            this.sweepHits++;
+            this.sweepTimes.push(Date.now() - this.sweepLastTime);
+            this.sweepLastTime = Date.now();
+        }
+
+        this.sweepMiss = function(){
+            this.sweepMisses++;
+        }
+
+        this.getTimeAverages = function(){
+            return {
+                right: this.rightTimes.reduce((a, b) => a + b, 0) / this.rightTimes.length,
+                left: this.leftTimes.reduce((a, b) => a + b, 0) / this.leftTimes.length,
+                sweep: this.sweepTimes.reduce((a, b) => a + b, 0) / this.sweepTimes.length
+            }
+        }
+
+        this.startRightTimer = function(){
+            this.rightLastTime = Date.now();
+        }
+
+        this.startLeftTimer = function(){
+            this.leftLastTime = Date.now();
+        }
+
+        this.startSweepTimer = function(){
+            this.sweepLastTime = Date.now();
+        }
+
+        this.reset = function(){
+            this.rightHits = 0;
+            this.leftHits = 0;
+            this.sweepHits = 0;
+            this.sweepMisses = 0;
+
+            this.rightTimes = [];
+            this.rightLastTime = 0;
+            this.leftTimes = [];
+            this.leftLastTime = 0;
+            this.sweepTimes = [];
+            this.sweepLastTime = 0;
+        }
+    }
+}
+
 ///////////////
 // FUNCTIONS //
 ///////////////
@@ -130,6 +202,28 @@ const getRectangleHeight = () => {
      * @returns {number} The height of the rectangle scaled to the canvas size
     */
     return Math.min(Math.max(3 * canvas.height / 4, MIN_RECT_HEIGHT), MAX_RECT_HEIGHT);
+}
+
+var sweepActive = false;
+var sweepActiveTimeout = null;
+
+const activateSweep = () => {
+    console.log("sweep activated")
+    sweepActive = true;
+    canvas.style.backgroundColor = "green";
+    sweepActiveTimeout = setTimeout(deactivateSweep, SWEEP_EACH_MILIS);
+}
+
+const deactivateSweep = () => {
+    console.log("sweep deactivated")
+    sweepActive = false;
+    canvas.style.backgroundColor = "white";
+    SWEEP_COUNTER++;
+    if (SWEEP_COUNTER > SWEEP_AMT) {
+        clearTimeout(sweepActiveTimeout);
+        return endSweepInteraction();
+    }
+    setTimeout(activateSweep, SWEEP_EACH_MILIS);
 }
 
 const startInteraction = () => {
@@ -159,10 +253,14 @@ const startTouchInteraction = () => {
 }
 
 const startSweepInteraction = () => {
-    console.log("Started Sweep interaction");
-    title.innerText = 'Prueba de Barrido: Presiona los cuadrados cuando se iluminen';
-    drawRectangles();
-    sweep();
+    console.log("Starting sweep interaction");
+    title.innerText = 'Presiona cuando se ilumnine';
+    clearRectangles();
+    canvas.style.backgroundColor = "white";
+    allowClick = true;
+    canvas.addEventListener("click", sweepClickListener);
+    measure.startSweepTimer();
+    setTimeout(activateSweep, SWEEP_EACH_MILIS); // start sweep loop
 }
 
 const restartInteraction = () => {
@@ -200,12 +298,9 @@ const endTouchInteraction = () => {
 }
 
 const endSweepInteraction = () => {
-    /**
-     * Called when the Sweep stage ends.
-     */
-    console.log("Ended Sweep interaction");
-    title.innerText = 'Presiona "Enviar" para enviar los resultados';
-    endInteraction();
+    title.innetText = 'Presiona "Enviar" para enviar tus respuestas';
+    canvas.removeEventListener("click", sweepClickListener);
+    endGame();
 }
 
 const drawRectangles = () => {
@@ -230,11 +325,24 @@ const drawRectangles = () => {
     figures[1].draw();
 }
 
+const clearRectangles = () => {
+    /**
+     * Clears the rectangles from the canvas
+    */
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
 ///////////////
 // LISTENERS //
 ///////////////
 
-allowClick = true;
+var allowClick = true;
+
+const sweepRestartClick = () => {
+    allowClick = true;
+    canvas.style.backgroundColor = "white";
+    deactivateSweep(); //on sweep, to restart the sweeping process
+}
 
 const resetRectangles = () => {
     /**
@@ -272,28 +380,18 @@ const touchClickListener = e => {
     }
 }
 
-const sweepClickListener = e => {
-    /**
-     * Called on canvas click for Sweep stage
-     */
-    if (figures[0].isActive() && figures[0].attempt(e.offsetX, e.offsetY)) {
-        // The rectangle was hit
-        console.log("Hit");
-        SWEEP_LEFT_HIT++;
-        allowClick = false;
-        clearTimeout(FINISH_SWEEP_TIMEOUT); // if the rectangle was hit do not wait for sweep to finish
-        setTimeout(resetRectangles, SWEEP_REFRACT_MILIS);
-    } else if (figures[1].isActive() && figures[1].attempt(e.offsetX, e.offsetY)) {
-        // The rectangle was hit
-        console.log("Hit");
-        SWEEP_RIGHT_HIT++;
-        allowClick = false;
-        clearTimeout(FINISH_SWEEP_TIMEOUT); // if the rectangle was hit do not wait for sweep to finish
-        setTimeout(resetRectangles, SWEEP_REFRACT_MILIS);
-    } else {
-        // The rectangle was not hit
-        console.log("Miss");
-        SWEEP_MISS++;
+const sweepClickListener = (e) => {
+    if (allowClick) {
+        console.log("Click detected on sweep test");
+        if (sweepActive){
+            allowClick = false;
+            measure.sweepHit();
+            canvas.style.backgroundColor = "green";
+            clearTimeout(sweepActiveTimeout);
+            setTimeout(sweepRestartClick, SWEEP_REFRACT_MILIS);
+        } else {
+            measure.sweepMiss();
+        }
     }
 }
 
@@ -380,3 +478,5 @@ const figures = [
     new rectangle(10, 10, RECT_WIDTH, RECT_HEIGHT, "white"),
     new rectangle(canvas.width - RECT_WIDTH - 10, 10, RECT_WIDTH, RECT_HEIGHT, "white")
 ]
+
+const measure = new measures();

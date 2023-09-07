@@ -88,28 +88,6 @@ class measures {
 // FUNCTIONS //
 ///////////////
 
-var sweepActive = false;
-var sweepActiveTimeout = null;
-
-const activateSweep = () => {
-    console.log("sweep activated")
-    sweepActive = true;
-    canvas.style.backgroundColor = "blue";
-    sweepActiveTimeout = setTimeout(deactivateSweep, SWEEP_EACH_MILIS);
-}
-
-const deactivateSweep = () => {
-    console.log("sweep deactivated")
-    sweepActive = false;
-    canvas.style.backgroundColor = "orange";
-    SWEEP_COUNTER++;
-    if (SWEEP_COUNTER > SWEEP_AMT) {
-        clearTimeout(sweepActiveTimeout);
-        return endSweepInteraction();
-    }
-    setTimeout(activateSweep, SWEEP_EACH_MILIS);
-}
-
 const startInteraction = () => {
     /**
      * Called when the user starts interacting with the canvas
@@ -121,7 +99,6 @@ const startInteraction = () => {
     allowClick = true;
     if (STAGE == STAGES[0]) startRightInteraction();
     else if (STAGE == STAGES[1]) startLeftInteraction();
-    else if (STAGE == STAGES[2]) startSweepInteraction();
 }
 
 const startRightInteraction = () => {
@@ -138,14 +115,6 @@ const startLeftInteraction = () => {
     canvas.addEventListener("click", clickLeftListener);
     measure.startLeftTimer();
     setTimeout(endInteraction, LEFT_MILIS);
-}
-
-const startSweepInteraction = () => {
-    console.log("Starting sweep interaction");
-    title.innerText = 'Presiona cuando se ilumnine';
-    canvas.addEventListener("click", clickSweepListener);
-    measure.startSweepTimer();
-    setTimeout(activateSweep, SWEEP_EACH_MILIS); // start sweep loop
 }
 
 const restartInteraction = () => {
@@ -165,7 +134,6 @@ const endInteraction = () => {
     allowClick = false;
     if (STAGE == STAGES[0]) endRightInteraction();
     else if (STAGE == STAGES[1]) endLeftInteraction();
-    else if (STAGE == STAGES[2]) endSweepInteraction();
 }
 
 const endRightInteraction = () => {
@@ -178,13 +146,6 @@ const endRightInteraction = () => {
 const endLeftInteraction = () => {
     title.innerText = 'Presiona "Continuar" para continuar a la prueba de barrido';
     canvas.removeEventListener("click", clickLeftListener);
-    STAGE = STAGES[2];
-    middleStage();
-}
-
-const endSweepInteraction = () => {
-    title.innetText = 'Presiona "Enviar" para enviar tus respuestas';
-    canvas.removeEventListener("click", clickSweepListener);
     endGame();
 }
 
@@ -220,26 +181,11 @@ const clickLeftListener = (e) => {
     }
 }
 
-const clickSweepListener = (e) => {
-    if (allowClick) {
-        console.log("Click detected on sweep test");
-        if (sweepActive){
-            allowClick = false;
-            measure.sweepHit();
-            canvas.style.backgroundColor = "green";
-            clearTimeout(sweepActiveTimeout);
-            setTimeout(restartClick, SWEEP_REFRACT_MILIS);
-        } else {
-            measure.sweepMiss();
-        }
-    }
-}
-
 /////////////
 // PROCESS //
 /////////////
 
-const STAGES = ["R", "L", "S"] //for Right (Touch), Left (Touch) and Sweep
+const STAGES = ["R", "L"] //for Right (Touch), Left (Touch) and Sweep
 var STAGE = STAGES[0]
 
 // TIME CONSTANTS
@@ -251,14 +197,6 @@ const RIGHT_REFRACT_MILIS = 3000; // 3 seconds
 const LEFT_MILIS = 40000;
 // Blocking time after a hit in Left (Touch)
 const LEFT_REFRACT_MILIS = 3000; // 3 seconds
-// Duration of the whole Sweep stage (in number of times the rectangles are swept). If no hit, whole Sweep stage will be SWEEP_COUNT * SWEEP_EACH_MILIS.
-const SWEEP_AMT = 6;
-var SWEEP_COUNTER = 0;
-// Duration of each rectangle blink in Sweep stage if no hit is detected (on hit the sweep continues)
-const SWEEP_EACH_MILIS = 10000; // 10 second
-// Blocking time after a hit in Sweep
-const SWEEP_REFRACT_MILIS = 3000; // 3 seconds
-
 
 //console.log(canvas.width, canvas.height, canvasBlock.clientWidth, canvasBlock.clientHeight)
 canvas.width = 0.9*canvasBlock.clientWidth;

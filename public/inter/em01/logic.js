@@ -54,27 +54,18 @@ const fillReport = () => {
     const rightHitsQuestion = "Toques con la mano derecha:";
     const leftHits = measure.leftHits;
     const leftHitsQuestion = "Toques con la mano izquierda:";
-    const sweepHits = measure.sweepHits;
-    const sweepHitsQuestion = "Toques en barrido:";
-    const sweepMisses = measure.sweepMisses;
-    const sweepMissQuestion = "Toques fallidos en barrido:";
 
     const timeAverages = measure.getTimeAverages();
     const rightTimeAverage = `${(timeAverages.right/1000).toFixed(2)} segs`;
     const rightTimeAverageQuestion = "Tiempo promedio con la mano derecha:";
     const leftTimeAverage = `${(timeAverages.left/1000).toFixed(2)} segs`;
     const leftTimeAverageQuestion = "Tiempo promedio con la mano izquierda:";
-    const sweepTimeAverage = `${(timeAverages.sweep/1000).toFixed(2)} segs`;
-    const sweepTimeAverageQuestion = "Tiempo promedio en barrido:";
 
     report.answers = [
         {question: rightHitsQuestion, answer: rightHits},
         {question: leftHitsQuestion, answer: leftHits},
-        {question: sweepHitsQuestion, answer: sweepHits},
-        {question: sweepMissQuestion, answer: sweepMisses},
         {question: rightTimeAverageQuestion, answer: rightTimeAverage},
-        {question: leftTimeAverageQuestion, answer: leftTimeAverage},
-        {question: sweepTimeAverageQuestion, answer: sweepTimeAverage}
+        {question: leftTimeAverageQuestion, answer: leftTimeAverage}
     ]
     report.filled = true;
 }
