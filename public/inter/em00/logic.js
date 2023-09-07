@@ -20,6 +20,7 @@ const startGame = () => {
     startButton.style.display = 'none';
     resetButton.style.display = 'none';
     canvas.style.display = canvasDisplay;
+    openCanvasFullScreen();
     startInteraction();
 }
 
@@ -28,6 +29,7 @@ const middleStage = () => {
     startButton.innerText = 'Continuar';
     startButton.style.display = startButtonDisplay;
     resetButton.style.display = resetButtonDisplay;
+    closeCanvasFullScreen();
 }
 
 const restartGame = () => {
@@ -36,6 +38,7 @@ const restartGame = () => {
     resetButton.style.display = 'none';
     canvas.style.display = canvasDisplay;
     unfillReport();
+    openCanvasFullScreen();
     restartInteraction();
 }
 
@@ -45,6 +48,7 @@ const endGame = () => {
     submitButton.style.display = submitButtonDisplay;
     resetButton.style.display = resetButtonDisplay;
     fillReport();
+    closeCanvasFullScreen();
     console.log(report);
 }
 
@@ -62,6 +66,7 @@ const fillReport = () => {
     const hitBalanceRight = `${((TOUCH_RIGHT_HIT / TOUCH_HIT) * 100).toFixed(2)}%`;
 
     // Sweep Q&A
+    const timeAverages = measure.getTimeAverages();
     const sweepHitsQuestion = "Toques en barrido:";
     const sweepMissQuestion = "Toques fallidos en barrido:";
     const sweepHits = measure.sweepHits;
@@ -83,6 +88,20 @@ const fillReport = () => {
 
 const unfillReport = () => {
     report.filled = false;
+}
+
+const openCanvasFullScreen = () => {
+    if (canvas.requestFullscreen) canvas.requestFullscreen();
+    else if (canvas.mozRequestFullScreen) canvas.mozRequestFullScreen(); /* Firefox */
+    else if (canvas.webkitRequestFullscreen) canvas.webkitRequestFullscreen(); /* Chrome, Safari and Opera */
+    else if (canvas.msRequestFullscreen) canvas.msRequestFullscreen(); /* IE/Edge */
+}
+
+const closeCanvasFullScreen = () => {
+    if (document.exitFullscreen) document.exitFullscreen();
+    else if (document.mozCancelFullScreen) document.mozCancelFullScreen(); /* Firefox */
+    else if (document.webkitExitFullscreen) document.webkitExitFullscreen(); /* Chrome, Safari and Opera */
+    else if (document.msExitFullscreen) document.msExitFullscreen(); /* IE/Edge */
 }
 
 startButton.addEventListener('click', startGame);
