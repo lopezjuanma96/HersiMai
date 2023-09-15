@@ -60,26 +60,24 @@ const fillReport = () => {
     const hitBalanceRightQuestion = "Balance de toques a la derecha:";
 
     const TOUCH_HIT = TOUCH_LEFT_HIT + TOUCH_RIGHT_HIT;
-    const touchHitRate = `${((TOUCH_HIT) / (TOUCH_HIT + TOUCH_MISS) * 100).toFixed(2)}%`;
+    const touchHitRate = `${(TOUCH_HIT / (TOUCH_HIT + TOUCH_MISS) * 100).toFixed(2)}%`;
     
     const hitBalanceLeft = `${((TOUCH_LEFT_HIT  / TOUCH_HIT) * 100).toFixed(2)}%`;
     const hitBalanceRight = `${((TOUCH_RIGHT_HIT / TOUCH_HIT) * 100).toFixed(2)}%`;
 
     // Sweep Q&A
+    const sweepHitRateQuestion = "Tasa de aciertos Barrido:";
+    const sweepTimeAverageQuestion = "Tiempo promedio en Barrido:";
+    
+    const sweepHitRate = `${(measure.sweepHits / (measure.sweepHits + measure.sweepMisses) * 100).toFixed(2)}%`;
     const timeAverages = measure.getTimeAverages();
-    const sweepHitsQuestion = "Toques en barrido:";
-    const sweepMissQuestion = "Toques fallidos en barrido:";
-    const sweepHits = measure.sweepHits;
-    const sweepMisses = measure.sweepMisses;
     const sweepTimeAverage = `${(timeAverages.sweep/1000).toFixed(2)} segs`;
-    const sweepTimeAverageQuestion = "Tiempo promedio en barrido:";
 
     report.answers = [
         {question: touchHitRateQuestion, answer: touchHitRate},
         {question: hitBalanceLeftQuestion, answer: hitBalanceLeft},
         {question: hitBalanceRightQuestion, answer: hitBalanceRight},
-        {question: sweepHitsQuestion, answer: sweepHits},
-        {question: sweepMissQuestion, answer: sweepMisses},
+        {question: sweepHitRateQuestion, answer: sweepHitRate},
         {question: sweepTimeAverageQuestion, answer: sweepTimeAverage}
     ]
 
