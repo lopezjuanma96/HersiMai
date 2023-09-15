@@ -223,7 +223,7 @@ const deactivateSweep = () => {
         clearTimeout(sweepActiveTimeout);
         return endSweepInteraction();
     }
-    setTimeout(activateSweep, SWEEP_EACH_MILIS);
+    setTimeout(activateSweep, Math.round(SWEEP_EACH_MILIS / 2));
 }
 
 const startInteraction = () => {
@@ -247,19 +247,18 @@ const startTouchInteraction = () => {
      * The Touch stage lasts for TOUCH_MILIS miliseconds.
      */
     console.log("Started Touch interaction");
-    title.innerText = 'Prueba Táctil: Presiona los cuadrados';
     drawRectangles();
+    canvas.addEventListener("mouseup", clickListener);
     setTimeout(endTouchInteraction, TOUCH_MILIS);
 }
 
 const startSweepInteraction = () => {
     console.log("Starting sweep interaction");
-    title.innerText = 'Presiona cuando se ilumnine';
     clearRectangles();
     canvas.style.backgroundColor = "white";
     allowClick = true;
-    canvas.addEventListener("click", sweepClickListener);
     measure.startSweepTimer();
+    canvas.addEventListener("mouseup", clickListener);
     setTimeout(activateSweep, SWEEP_EACH_MILIS); // start sweep loop
 }
 
@@ -276,6 +275,7 @@ const restartInteraction = () => {
     SWEEP_RIGHT_HIT = 0;
     SWEEP_MISS = 0;
     SWEEP_COUNTER = 0;
+    clearRectangles();
     startInteraction();
 }
 
@@ -292,14 +292,15 @@ const endTouchInteraction = () => {
      * Called when the Touch stage ends.
      */
     console.log("Ended Touch interaction");
-    title.innerText = 'Presiona "Continuar" para continuar con la prueba de Barrido';
+    title.innerText = 'Prueba Barrido: Presiona cuando se ilumnine';
     STAGE = STAGES[1];
+    canvas.removeEventListener("mouseup", clickListener);
     middleStage();
 }
 
 const endSweepInteraction = () => {
     title.innetText = 'Presiona "Enviar" para enviar tus respuestas';
-    canvas.removeEventListener("click", sweepClickListener);
+    canvas.removeEventListener("mouseup", clickListener);
     endGame();
 }
 
@@ -329,6 +330,7 @@ const clearRectangles = () => {
     /**
      * Clears the rectangles from the canvas
     */
+    canvas.style.backgroundColor = "black"
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
@@ -417,7 +419,7 @@ const finishSweep = () => {
     const PREV_RECT = SWEEP_COUNTER % figures.length;
     figures[PREV_RECT].deactivate();
     SWEEP_COUNTER++;
-    setTimeout(sweep, SWEEP_REFRACT_MILIS);
+    setTimeout(sweep, Math.floor(SWEEP_EACH_MILIS / 2)); //for the no-sweep the time is half
 }
 
 const clickListener = e => {
@@ -428,8 +430,6 @@ const clickListener = e => {
     else if (STAGE == STAGES[0]) touchClickListener(e);
     else if (STAGE == STAGES[1]) sweepClickListener(e);
 }
-
-canvas.addEventListener("click", clickListener);
 
 /////////////
 // PROCESS //
@@ -456,10 +456,10 @@ const TOUCH_REFRACT_MILIS = 3000; // 3 seconds
 const SWEEP_AMT = 6;
 var SWEEP_COUNTER = 0;
 // Duration of each rectangle blink in Sweep stage if no hit is detected (on hit the sweep continues)
-const SWEEP_EACH_MILIS = 10000; // 10 seconds
+const SWEEP_EACH_MILIS = 8000; // 10 seconds
 var FINISH_SWEEP_TIMEOUT;
 // Blocking time after a hit in Sweep stage
-const SWEEP_REFRACT_MILIS = 3000; // 3 seconds
+const SWEEP_REFRACT_MILIS = 300; // 3 seconds
 
 // SCORES
 var TOUCH_LEFT_HIT = 0;
@@ -472,7 +472,7 @@ var SWEEP_MISS = 0;
 canvas.width = 0.9*canvasBlock.clientWidth;
 canvas.height = 0.9* canvasBlock.clientHeight;
 
-title.innerText = 'Presiona "Comenzar" para iniciar la prueba Táctil';
+title.innerText = 'Prueba Táctil: Presiona los cuadrados';
 
 const figures = [
     new rectangle(10, 10, RECT_WIDTH, RECT_HEIGHT, "white"),

@@ -104,7 +104,7 @@ const startInteraction = () => {
 const startRightInteraction = () => {
     console.log("Starting right interaction");
     title.innerText = 'Presiona con la mano derecha';
-    canvas.addEventListener("click", clickRightListener);
+    canvas.addEventListener("mouseup", clickRightListener);
     measure.startRightTimer();
     setTimeout(endInteraction, RIGHT_MILIS);
 }
@@ -112,7 +112,7 @@ const startRightInteraction = () => {
 const startLeftInteraction = () => {
     console.log("Starting left interaction");
     title.innerText = 'Presiona con la mano izquierda';
-    canvas.addEventListener("click", clickLeftListener);
+    canvas.addEventListener("mouseup", clickLeftListener);
     measure.startLeftTimer();
     setTimeout(endInteraction, LEFT_MILIS);
 }
@@ -138,14 +138,14 @@ const endInteraction = () => {
 
 const endRightInteraction = () => {
     title.innerText = 'Presiona "Continuar" para continuar a la prueba de la mano izquierda';
-    canvas.removeEventListener("click", clickRightListener);
+    canvas.removeEventListener("mouseup", clickRightListener);
     STAGE = STAGES[1];
     middleStage();
 }
 
 const endLeftInteraction = () => {
     title.innerText = 'Presiona "Continuar" para continuar a la prueba de barrido';
-    canvas.removeEventListener("click", clickLeftListener);
+    canvas.removeEventListener("mouseup", clickLeftListener);
     endGame();
 }
 

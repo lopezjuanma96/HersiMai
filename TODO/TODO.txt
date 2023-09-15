@@ -1,5 +1,13 @@
 CRUCIALES
-- Preparar los agentes de resultados y de lista de evaluaciones (anulan o activan evaluaciones segun resultados)
+- EM00 metricas de tactil:
+    -- Tasa de aciertos: toques en el cuadrado sobre toques totales. (para la derecha, para la izquierda y globales) (solo el global da resultados, los otros son informativos para el reporte final)
+    -- Promedio de intentos: promedio de intentos erroneos antes de un intento correcto (cada vez que toca correctamente se reinicia la cuenta de erroneos y al final se promedia)
+- EM00 metricas de barrido:
+    -- Tasa de aciertos: toques en barrido activo sobre toques totales.
+- EM01 metricas: Ya están hechas ambas pero las repito
+    -- cantidad de toques: para la formulario
+    -- tiempo promedio de toques: informativo
+- Agentes de resultados y de lista de evaluaciones (anulan o activan evaluaciones segun resultados)
 - Agregar en creacion de usuario el nombre del gestor a partir de la sesión (tiene que estar el gestor de sesiones de gestores/evaluadores).
 - Agregar "Eliminar datos" en resultados, usuario y lista de usuarios. Que vaya a una página que pida un código por ahora harcodeado.
 Que haga un request a la API con los query params desde donde haya hecho el click de "borrar datos" originalmente y a partir de cuales datos pasó borre una cosa u otra.
