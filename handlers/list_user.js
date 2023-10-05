@@ -1,4 +1,4 @@
-const { getUserListFilePath, readUserListFile } = require('./files.js')
+const { getUserListFilePath, readUserListFile, deleteUserListFile, listFormFiles, deleteAllFormAnswersFiles } = require('./files.js')
 
 const listUserHandler = (req, res) => {
     res.status(200).send({
@@ -13,6 +13,17 @@ const exportUserListHandler = (req, res) => {
     res.status(200).download(getUserListFilePath())
 }
 
+const removeUserListHandler = (req, res) => {
+    listFormFiles().forEach(formId => {
+        deleteAllFormAnswersFiles(formId);
+    });
+    deleteUserListFile();
+    res.status(200).send({
+        code: 'success',
+        msg: "Se ha eliminado la lista de usuarios correctamente."
+    })
+}
+
 const getUserListArr = () => {
     const userList = readUserListFile();
     const userListArr = [];
@@ -23,4 +34,4 @@ const getUserListArr = () => {
     return userListArr
 }
 
-module.exports = { listUserHandler, exportUserListHandler }
+module.exports = { listUserHandler, exportUserListHandler, removeUserListHandler }

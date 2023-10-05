@@ -1,7 +1,7 @@
 const express = require("express");
 
 const { newUserHandler } = require("./handlers/new_user.js");
-const { listUserHandler, exportUserListHandler } = require("./handlers/list_user.js");
+const { listUserHandler, exportUserListHandler, removeUserListHandler } = require("./handlers/list_user.js");
 const { userDetailHandler } = require("./handlers/user_detail.js");
 
 const { listFormsHandler, getFormHandler, newFormHandler, getAnswerFormHandler, newAnswerFormHandler } = require("./handlers/forms.js");
@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 
 app.get('/api/list_user', listUserHandler)
 app.get('/api/list_user/export', exportUserListHandler)
+app.delete('/api/list_user', removeUserListHandler)
 app.get('/api/user_detail', userDetailHandler)
 app.post('/api/new_user', newUserHandler)
 

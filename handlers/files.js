@@ -1,4 +1,4 @@
-const { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } = require("fs");
+const { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, unlinkSync } = require("fs");
 
 const DATA_DIR = __dirname + "/../data"
 const USER_LIST_PATH = __dirname + "/../data/user_list.json"
@@ -21,6 +21,16 @@ const saveUserListFile = (userList) => {
     const fileText = JSON.stringify(userList) // de-understand the userList back into a string of text in the JSON format
     checkMakeDirs(getUserListFilePath());
     writeFileSync(getUserListFilePath(), fileText, {encoding: "utf-8"})
+}
+
+const deleteUserListFile = () => {
+    try {
+        // instead of deleting the file, we just overwrite it with an empty object
+        saveUserListFile({});
+    } catch (e) {
+        if (e.code === "ENOENT") return; // if the file doesn't exist, we don't need to delete it
+        else throw e;
+    }
 }
 
 const getFormFileDir = () => FORMS_DIR;
@@ -73,6 +83,25 @@ const saveFormAnswersFile = (formId, code, answers) => {
     writeFileSync(getFormAnswersFilePath(formId, code), fileText, {encoding: "utf-8"});
 }
 
+const deleteFormAnswersFile = (formId, code) => {
+    try {
+        unlinkSync(getFormAnswersFilePath(formId, code));
+    } catch (e) {
+        if (e.code === "ENOENT") return; // if the file doesn't exist, we don't need to delete it
+        else throw e;
+    }
+}
+
+const deleteAllFormAnswersFiles = (formId) => {
+    /**
+     * deletes all form answers fot that form id
+     */
+    const userList = readUserListFile();
+    for (let code in userList) {
+        deleteFormAnswersFile(formId, code);
+    }
+}
+
 const checkMakeDirs = (path) => {
     const dirs = path.split("/");
     let dir = "";
@@ -83,8 +112,8 @@ const checkMakeDirs = (path) => {
 }
 
 module.exports = {
-    getUserListFilePath, readUserListFile, saveUserListFile,
+    getUserListFilePath, readUserListFile, saveUserListFile, deleteUserListFile,
     getFormFileDir, listFormFiles,
     getFormFilePath, readFormFile, saveFormFile,
-    getFormAnswersFilePath, readFormAnswersFile, saveFormAnswersFile
+    getFormAnswersFilePath, readFormAnswersFile, saveFormAnswersFile, deleteFormAnswersFile, deleteAllFormAnswersFiles
 }
