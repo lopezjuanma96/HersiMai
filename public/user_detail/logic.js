@@ -2,7 +2,7 @@ const baseUrl = window.location.origin;
 const queryParams = window.location.search;
 
 const titleBlockUserName = document.getElementById("titleBlockUserName");
-const titleBlockUserEmail = document.getElementById("titleBlockUserEmail");
+const titleBlockCaregiverName = document.getElementById("titleBlockCaregiverName");
 const titleBlockEvalName = document.getElementById("titleBlockEvalName");
 const titleBlockEvalState = document.getElementById("titleBlockEvalState");
 
@@ -81,7 +81,13 @@ async function fetchData(){
         // Updating the formListData
         formListData[i].type = formDetail.type.toLowerCase();
         formListData[i].title = formDetail.title;
-        if (formLastReport) formListData[i].state = formLastReport.state.toLowerCase();
+        if (formLastReport) {
+            formListData[i].state = formLastReport.state.toLowerCase();
+            if (formListData[i].id === "prelimF01") {
+                const caregiverName = formLastReport.answers.find(a => a.id === "aBs1a13d")?.answer;
+                if (caregiverName) formListData[i].caregiver = caregiverName;
+            } 
+        }
         else formListData[i].state = 'incomplete';
     }
 
@@ -93,12 +99,25 @@ async function fetchData(){
 
 // Calling the fetchData function
 
+const rowSorting = [
+    "prevalF",
+    "prelimF01",
+    "motG01",
+    "softG01",
+    "em00",
+    "em01",
+    "em02",
+    "em03"
+]
+
 fetchData().then((data) => {
-    const {userDetail, formListData} = data;
+    const {userDetail, formListData: formListDataRaw} = data;
+
+    // Sorting formListData: sort with rowSorting
+    const formListData = formListDataRaw.sort((a, b) => rowSorting.findIndex(e => e === a.id) - rowSorting.findIndex(e => e === b.id))
 
     // Updating the title block
     titleBlockUserName.innerText = userDetail.userName;
-    titleBlockUserEmail.innerText = userDetail.userEmail;
     titleBlockEvalName.innerText = userDetail.evalName;
 
     // Updating the form list
@@ -109,8 +128,12 @@ fetchData().then((data) => {
         else if (formData.type === 'form') listTableBody.innerHTML += renderFormRow(userDetail, formData);
         else if (formData.type === 'report') listTableBody.innerHTML += renderReportRow(userDetail, formData);
         else if (formData.type === 'inter') listTableBody.innerHTML += renderInterRow(userDetail, formData);
+        else if (formData.type === 'upload') listTableBody.innerHTML += renderUploadRow(userDetail, formData);
         
-        if (formData.state === 'complete' || formData.state === 'completado') completedForms++;
+        if (formData.state === 'complete' || formData.state === 'completado' || formData.type === 'upload') {
+            completedForms++;
+            if (formData.id === 'prelimF01' && formData.caregiver) titleBlockCaregiverName.innerText = formData.caregiver
+        }
     }
 
     // Updating the title block eval state
@@ -145,11 +168,6 @@ const renderFormRow = (userDetail, formData) => `
                 }
             </div>
         </td>
-        <td class="col-3">
-            <div class="row justify-content-center align-items-center">
-                ${getResetButton()}
-            </div>
-        </td>
     </tr>
 `
 
@@ -172,11 +190,6 @@ const renderReportRow = (userDetail, formData) => `
                     `<a class="w-50 btn btn-primary orangeButton" href="/results?code=${userDetail.userCode}&fid=${formData.id}" target="_blank">Ver</a>` :
                     '<a class="w-50 btn btn-primary grayButton">No disponible</a>'
                 }
-            </div>
-        </td>
-        <td class="col-3">
-            <div class="row justify-content-center align-items-center">
-                ${getResetButton()}
             </div>
         </td>
     </tr>
@@ -203,9 +216,28 @@ const renderInterRow = (userDetail, formData) => `
                 }
             </div>
         </td>
+    </tr>
+`
+
+// renderUploadRow adds an upload button since the form is imported from other platforms
+const renderUploadRow = (userDetail, formData) => `
+    <tr class="mb-3">
+        <td class="col-3">${formData.title}</td>
+        <td class="col-3">
+            <p class="textGray">N/A</p>
+        </td>
         <td class="col-3">
             <div class="row justify-content-center align-items-center">
-                ${getResetButton()}
+                <button class="w-50 btn btn-primary redButton" type="button">Importar</button>
+            </div>
+        </td>
+        <td class="col-3">
+            <div class="row justify-content-center align-items-center">
+                ${
+                    formData.state === 'complete' || formData.state === 'completado' ?
+                    `<a class="w-50 btn btn-primary orangeButton" href="/results?code=${userDetail.userCode}&fid=${formData.id}" target="_blank">Ver</a>` :
+                    '<a class="w-50 btn btn-primary grayButton">No disponible</a>'
+                }
             </div>
         </td>
     </tr>

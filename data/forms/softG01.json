@@ -1,0 +1,70 @@
+{
+    "title": "Formulario Software Preliminar",
+    "type": "form",
+    "fid": "prelimF01",
+    "questions": [
+        {
+            "type": "title",
+            "question": "Relacionado a los tipos de software que ofrecemos y sus objetivos"
+        },
+        {
+            "type": "yesno",
+            "question": "¿Requiere función de predictibilidad?",
+            "id": "47neZv1P",
+            "help": "Esta función aplica a cuatro pictogramas, los cuales van cambiando en función de la elección."
+            
+        },
+        {
+            "type": "option",
+            "question": "¿Entre cuántos estímulos puede seleccionar el usuario?",
+            "options": [
+                "Entre dos",
+                "Cuatro o más"
+            ],
+            "id": "wVBYaohP",
+            "help": "Hace referencia a cuántos pictogramas se muestran en pantalla."
+
+        },
+        {
+            "type": "option",
+            "question": "¿Cuál es el objetivo que se le quiere dar al software de comunicación?",
+            "options": [
+                "Armado de frases/desarrollo del lenguaje",
+                "Iniciación en la comunicación (fase 1 o 2 de PECS)"
+            ],
+            "id": "pwJP0k3S",
+            "help": ""
+
+        },
+        {
+            "type": "yesno",
+            "question": "¿Requiere que haya un teclado virtual?",
+            "id": "JJhQjNqq"
+        },
+        {
+            "type": "option",
+            "question": "¿Qué dispositivo se prefiere?",
+            "options": [
+                "Tablet",
+                "Celular"
+            ],
+            "id": "RhjuY7sE",
+            "help": "Tener en cuenta que el celular permite mayor portabilidad para transportar en actividades diarias, mientras que la tablet permite mayor visualización en pantalla."
+
+        },
+        {
+            "type": "yesno",
+            "question": "¿Puede visualizar pictogramas de tamaño de 6x3cm?",
+            "id": "SEoP70yq",
+            "help": "Tener en cuenta que el tamaño es para una tablet. Responder que NO si requiere pictogramas más grandes."
+
+        },
+        {
+            "type": "yesno",
+            "question": "¿Se considera importante que el sistema evite clics consecutivos?",
+            "id": "gAkBS6Bb",
+            "help": "Responder que SÍ si es necesario que el sistema cuente con un tiempo de espera antes de tomar el siguiente clic, para evitar toques involuntarios."
+
+        }
+    ]
+}

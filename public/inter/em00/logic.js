@@ -55,11 +55,13 @@ const endGame = () => {
 const fillReport = () => {
 
     // Touch Q&A
+    const touchHitCountQuestion = "Cantidad de toques:";
     const touchHitRateQuestion = "Tasa de aciertos Táctil:";
     const hitBalanceLeftQuestion = "Balance de toques a la izquierda:";
     const hitBalanceRightQuestion = "Balance de toques a la derecha:";
 
     const TOUCH_HIT = TOUCH_LEFT_HIT + TOUCH_RIGHT_HIT;
+    const touchHitCount = TOUCH_HIT + TOUCH_MISS;
     const touchHitRate = `${(TOUCH_HIT / (TOUCH_HIT + TOUCH_MISS) * 100).toFixed(2)}%`;
     
     const hitBalanceLeft = `${((TOUCH_LEFT_HIT  / TOUCH_HIT) * 100).toFixed(2)}%`;
@@ -74,11 +76,12 @@ const fillReport = () => {
     const sweepTimeAverage = `${(timeAverages.sweep/1000).toFixed(2)} segs`;
 
     report.answers = [
-        {question: touchHitRateQuestion, answer: touchHitRate},
-        {question: hitBalanceLeftQuestion, answer: hitBalanceLeft},
-        {question: hitBalanceRightQuestion, answer: hitBalanceRight},
-        {question: sweepHitRateQuestion, answer: sweepHitRate},
-        {question: sweepTimeAverageQuestion, answer: sweepTimeAverage}
+        {id: "g7SlQAZP", question: touchHitCountQuestion, answer: touchHitCount},
+        {id: "Wqwzz6bj", question: touchHitRateQuestion, answer: touchHitRate},
+        {id: "C2cSeg24", question: hitBalanceLeftQuestion, answer: hitBalanceLeft},
+        {id: "wstomdm7", question: hitBalanceRightQuestion, answer: hitBalanceRight},
+        {id: "X7tnpNV6", question: sweepHitRateQuestion, answer: sweepHitRate},
+        {id: "ona12DVR", question: sweepTimeAverageQuestion, answer: sweepTimeAverage}
     ]
 
     report.filled = true;

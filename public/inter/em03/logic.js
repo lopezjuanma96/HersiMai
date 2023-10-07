@@ -59,8 +59,8 @@ const fillReport = () => {
     const attemptAvg = hitCount > 0 ? (attemptCount / hitCount).toFixed(2) : 'inválido';
 
     report.answers = [
-        {question: hitRateQuestion, answer: hitRate},
-        {question: attemptAvgQuestion, answer: attemptAvg}
+        {id: "Q3ZRK9nb", question: hitRateQuestion, answer: hitRate},
+        {id: "mfB8ymW4", question: attemptAvgQuestion, answer: attemptAvg}
     ]
     report.filled = true;
 }

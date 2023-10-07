@@ -29,6 +29,17 @@ a {
     opacity: 70%;
 }
 
+.redButton {
+    background-color: #ff0000;
+    border-color: #ff0000;
+}
+
+.redButton:hover {
+    background-color: #ff0000;
+    border-color: #ff0000;
+    opacity: 70%;
+}
+
 .grayButton {
     background-color: gray;
     border-color: gray;
@@ -54,6 +65,10 @@ a {
 
 .textGreen {
     color: green;
+}
+
+.textGray {
+    color: gray;
 }
 
 #mainBlock {

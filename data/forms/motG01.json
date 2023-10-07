@@ -1,44 +1,36 @@
 {
     "title": "Evaluación Motriz Preliminar",
-    "type": "report",
+    "type": "form",
     "fid": "motG01",
     "questions": [
         {
             "type": "yesno",
-            "question": "¿Puede usar el teléfono celular sólo?",
-            "id": ""
+            "question": "¿Puede señalar con alguno de sus dedos?",
+            "id": "sIh2a0Sw"
+
         },
         {
             "type": "yesno",
-            "question": "¿Puede señalar con el dedo?",
-            "id": ""
+            "question": "¿Puede realizar un movimiento de presión, aunque sea mínima, con una de sus extremidades superiores?",
+            "id": "4uC28XYW",
+            "help": "Considerar que esta pregunta apunta a evaluar la posibilidad de uso de un pulsador"
         },
         {
             "type": "yesno",
-            "question": "¿Presenta algún rango de movimiento voluntario y controlado en MMSS?",
-         
-            "id": ""
+            "question": "¿Tiene buen control cefálico?",
+            "id": "mUXFsHPj"
         },
         {
             "type": "yesno",
-            "question": "¿Puede mover la cabeza con movimientos controlados?",
-            "id": ""
-        },
-        {
-            "type": "option",
-            "question": "¿Posee alguna condición visual?",
-            "options": [
-                "Nistagmo",
-                "Otras",
-                "Ninguna",
-                "Sí, corregida"
-            ],
-            "id": ""
+            "question": "¿Tiene nistagmo o utiliza lentes bifocales?",
+            "id": "geDTuWoo",
+            "help": "En el caso de contar con alguna otra condición visual, como estrabismo, aclarar en OBSERVACIONES"
         },
         {
             "type": "text",
             "question": "Observaciones:",
-            "id": ""
+            "id": "o40C6Zsa",
+            "help": "Espacio para comentarios o aclaraciones que considere relevantes"
         }
     ]
 }

@@ -66,10 +66,10 @@ const fillReport = () => {
     const leftTimeAverageQuestion = "Tiempo promedio con la mano izquierda:";
 
     report.answers = [
-        {question: rightHitsQuestion, answer: rightHits},
-        {question: leftHitsQuestion, answer: leftHits},
-        {question: rightTimeAverageQuestion, answer: rightTimeAverage},
-        {question: leftTimeAverageQuestion, answer: leftTimeAverage}
+        {id: "KU3N33I4", question: rightHitsQuestion, answer: rightHits},
+        {id: "ikM8GCC7", question: leftHitsQuestion, answer: leftHits},
+        {id: "wjhQu85C", question: rightTimeAverageQuestion, answer: rightTimeAverage},
+        {id: "HQ66459v", question: leftTimeAverageQuestion, answer: leftTimeAverage}
     ]
     report.filled = true;
 }

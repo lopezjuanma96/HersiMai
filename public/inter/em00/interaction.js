@@ -472,7 +472,7 @@ var SWEEP_MISS = 0;
 canvas.width = 0.9*canvasBlock.clientWidth;
 canvas.height = 0.9* canvasBlock.clientHeight;
 
-title.innerText = 'Prueba Táctil: Presiona los cuadrados';
+title.innerText = 'Prueba Táctil: Presiona los rectángulos';
 
 const figures = [
     new rectangle(10, 10, RECT_WIDTH, RECT_HEIGHT, "white"),

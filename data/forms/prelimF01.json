@@ -5,109 +5,29 @@
     "questions": [
         {
             "type": "title",
-            "question": "Datos del Profesional:"
+            "question": "Datos del Profesional:",
+            "id": "5lnfkLam"
         },
         {
             "type": "text",
-            "question": "Nombre del Profesional:",
-            "id": ""
+            "question": "Nombre y Apellido del Profesional:",
+            "id": "aBs1a13d"
         },
         {
             "type": "text",
             "question": "Correo del Profesional:",
-            "id": ""
+            "id": "1T6J0J67"
         },
         {
             "type": "title",
-            "question": "Datos del Usuario:"
-        },
-        {
-            "type": "title",
-            "question": "Relacionado únicamente a la MOTRICIDAD del usuario:"
+            "question": "Relacionado únicamente a la MOTRICIDAD del usuario:",
+            "id": "Nls18u6J"
         },
         {
             "type": "yesno",
-            "question": "¿Posee alguna discapacidad motriz?",
-            "id": "",
-            "help":"Si contesta que NO, se considera que la persona puede utilizar un teléfono celular con pantalla táctil de forma autónoma."
-
-        },
-        {
-            "type": "title",
-            "question": "Relacionado a los tipos de software que ofrecemos y sus objetivos, seleccione de cada fila una sola opción:"
-        },
-        {
-            "type": "option",
-            "question": "¿Qué disposición de la pantalla se prefiere?",
-            "options": [
-                "Dinámica",
-                "Estática"
-            ],
-            "id": "",
-            "help": "'Estática': los pictogramas se mantienen en posiciones fija. 'Dinámica': los pictogramas que se muestran van cambiando en función de la elección, ya que utiliza un sistema de predicción."
-            
-        },
-        {
-            "type": "option",
-            "question": "¿Qué amplitud de conceptos se quiere abarcar?",
-            "options": [
-                "Simples",
-                "Complejos"
-            ],
-            "id": "FWNxptRX",
-            "help": "'Simples': Sí/No. 'Complejos': acciones o secuencias (beber/comer/ir a...)"
-
-        },
-        {
-            "type": "option",
-            "question": "¿Hasta cuántos estímulos se necesitan?",
-            "options": [
-                "Sólo dos",
-                "Cuatro o más"
-            ],
-            "id": "",
-            "help": "Hace referencia a cuántos pictogramas se muestran en pantalla."
-
-        },
-        {
-            "type": "yesno",
-            "question": "¿Se considera importante que haya un teclado virtual?",
-            "id": ""
-
-        },
-        {
-            "type": "option",
-            "question": "¿Cuál es el uso que se le quiere dar al software de comunicación?",
-            "options": [
-                "Desarrollo del lenguaje",
-                "Iniciación"
-            ],
-            "id": "",
-            "help": "'Desarrollo': armar frases. 'Iniciación': asociar pictogramas"
-
-        },
-        {
-            "type": "yesno",
-            "question": "¿Se considera importante que los pictogramas tengan un gran tamaño?",
-            "id": "",
-            "help": "Responder que 'SÍ' si necesita trabajar con pictogramas de gran tamaño que ocupen gran parte de la pantalla o 'NO' si no hay inconvenientes en trabajar con pictogramas de tamaño más pequeños, aproximadamente 6x3cm."
-
-        },
-        {
-            "type": "yesno",
-            "question": "¿Se considera importante que el sistema evite clicks consecutivos?",
-            "id": "",
-            "help": "Responder que 'SÍ' si es necesario que el sistema cuente con un tiempo de espera antes de tomar el siguiente click, para evitar toques involuntarios."
-
-        },
-        {
-            "type": "option",
-            "question": "¿Qué se prioriza?",
-            "options": [
-                "Mayor visualización",
-                "Portabilidad"
-            ],
-            "id": "FWNxptRX"
+            "question": "¿Puede usar un celular de forma autónoma y sin dificultades?",
+            "id": "JSkgkzCm",
+            "help":"Si contesta que SÍ, se considera que la persona puede utilizar un teléfono celular con pantalla táctil de forma autónoma."
         }
     ]
 }
