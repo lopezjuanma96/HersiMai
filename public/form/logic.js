@@ -213,6 +213,11 @@ questionsFormSubmitButton.addEventListener('click', (e) => {
             return alert(resJson.msg);
         }
         alert("Respuestas enviadas correctamente.");
+        if (resJson.redirect){
+            const params = new URLSearchParams(queryParams);
+            params.set("fid", resJson.redirect);
+            window.location.search = params.toString();
+        }
     }).catch((err) => {
         console.log(err);
         alert("Ha ocurrido un error al enviar las respuestas. Intente nuevamente.");

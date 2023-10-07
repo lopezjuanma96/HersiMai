@@ -44,7 +44,7 @@ async function fetchData(){
     if (resJson.code !== 'success') throw new Error("Error al obtener la lista de evaluaciones: ", resJson.msg);
 
     const formList = resJson.data;
-    const formListData = formList.map(formId => {return {id: formId, title: 'undefined', type: 'undefined', state: 'undefined'}});
+    const formListData = formList.map(formId => {return { id: formId, title: 'undefined', type: 'undefined', state: 'undefined', redirected: false }});
 
     //console.log('formList:');
     //console.log(formList);
@@ -54,7 +54,7 @@ async function fetchData(){
         const formId = formList[i];
 
         // Fetching the form details (for each form)
-        res = await fetch(`/api/form?fid=${formId}`, {
+        res = await fetch(`/api/form?fid=${formId}&code=${userDetail.userCode}`, {
             method: "GET",
             headers: {
                 "Accept": "application/json",
@@ -81,6 +81,8 @@ async function fetchData(){
         // Updating the formListData
         formListData[i].type = formDetail.type.toLowerCase();
         formListData[i].title = formDetail.title;
+        formListData[i].disabled = formDetail.disabled;
+        formListData[i].redirected = formDetail.redirected;
         if (formLastReport) {
             formListData[i].state = formLastReport.state.toLowerCase();
             if (formListData[i].id === "prelimF01") {
@@ -146,6 +148,13 @@ fetchData().then((data) => {
     //window.location.pathname = "/list_user"
 })
 
+const renderRedirectedButton = () => `
+    <button class="w-50 btn btn-primary emeraldButton" type="button">Autocomp.</button>
+`
+
+const renderCopyButton = (userDetail, formData) => `
+    <button class="w-50 btn btn-primary blueButton" type="button" onclick="copyToClipBoard(\'${userDetail.userCode}\', \'${formData.id}\', \'${formData.type}\')">Copiar link</button>
+`
 
 // renderFormRow adds a copy link button since the form is being sent to the caregiver 
 const renderFormRow = (userDetail, formData) => `
@@ -156,7 +165,11 @@ const renderFormRow = (userDetail, formData) => `
         </td>
         <td class="col-3">
             <div class="row justify-content-center align-items-center">
-                <button class="w-50 btn btn-primary blueButton" type="button" onclick="copyToClipBoard(\'${userDetail.userCode}\', \'${formData.id}\', \'${formData.type}\')">Copiar link</button>
+                ${
+                    formData.disabled
+                    ? '<a class="w-50 btn btn-primary grayButton">Deshabilitado</a>'
+                    : formData.redirected ? renderRedirectedButton() : renderCopyButton(userDetail, formData) 
+                }
             </div>
         </td>
         <td class="col-3">
@@ -204,7 +217,11 @@ const renderInterRow = (userDetail, formData) => `
         </td>
         <td class="col-3">
             <div class="row justify-content-center align-items-center">
-                <button class="w-50 btn btn-primary blueButton" type="button" onclick="copyToClipBoard(\'${userDetail.userCode}\', \'${formData.id}\', \'${formData.type}\')">Copiar link</button>
+                ${
+                    formData.disabled
+                    ? '<a class="w-50 btn btn-primary grayButton">Deshabilitado</a>'
+                    : formData.redirected ? renderRedirectedButton() : renderCopyButton(userDetail, formData) 
+                }    
             </div>
         </td>
         <td class="col-3">

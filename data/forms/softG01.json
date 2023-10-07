@@ -2,6 +2,7 @@
     "title": "Formulario Software Preliminar",
     "type": "form",
     "fid": "prelimF01",
+    "redirected": true,
     "questions": [
         {
             "type": "title",

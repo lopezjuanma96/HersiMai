@@ -1,4 +1,5 @@
 const { readFormFile, listFormFiles, readFormAnswersFile, saveFormAnswersFile } = require("./files.js")
+const { formAgent, answerAgent } = require("./agents.js")
 
 // FORMS
 
@@ -16,15 +17,16 @@ const listFormsHandler = (req, res) => {
 
 const getFormHandler = (req, res) => {
     const formId = req.query.fid;
+    const code = req.query.code;
     const formData = readFormFile(formId);
     
     //if (formData === {}) return res.status(404).send({code: 'form-not-found', msg: `El formulario ${formId} no se encontró`})
     
-    return res.status(200).send({
+    return res.status(200).send(formAgent.apply("GET", formId, code, formData, {
         code: 'success',
         data: formData,
         msg: "Se devuelve el detalle del formulario " + formId + " correctamente." 
-    })
+    }))
 }
 
 const newFormHandler = (req, res) => {
@@ -62,11 +64,11 @@ const newAnswerFormHandler = (req, res) => {
 
     saveFormAnswersFile(formId, code, answers);
 
-    return res.status(200).send({
+    return res.status(200).send(answerAgent.apply("POST", formId, code, data, {
         code: 'success',
         answer_count: answers.length,
         msg: "Se ha respondido el formulario " + formId + " correctamente."
-    })
+    }))
 }
 
 module.exports = { listFormsHandler, getFormHandler, newFormHandler, getAnswerFormHandler, newAnswerFormHandler }

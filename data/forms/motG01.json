@@ -2,6 +2,7 @@
     "title": "Evaluación Motriz Preliminar",
     "type": "form",
     "fid": "motG01",
+    "redirected": true,
     "questions": [
         {
             "type": "yesno",

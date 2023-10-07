@@ -29,6 +29,18 @@ a {
     opacity: 70%;
 }
 
+.emeraldButton {
+    background-color: #03bb85;
+    border-color: #03bb85;
+}
+
+.emeraldButton:hover {
+    background-color: #03bb85;
+    border-color: #03bb85;
+    cursor: not-allowed;
+    opacity: 70%;
+}
+
 .redButton {
     background-color: #ff0000;
     border-color: #ff0000;
