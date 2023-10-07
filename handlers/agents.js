@@ -41,6 +41,11 @@ class FormAgent extends Agent {
             "GET": {
                 "em00": (user, data, response) => {
                     const motG01AnswersObject = readFormAnswersFile("motG01", user);
+                    if (motG01AnswersObject.length === 0) {
+                        data.disabled = true;
+                        response.formData = data;
+                        return response;
+                    }
                     const motG01Answers = motG01AnswersObject[motG01AnswersObject.length - 1];
                     const canPointQuestionId = "sIh2a0Sw";
                     const canPointQuestion = motG01Answers.answers.find(a => a.id === canPointQuestionId);
@@ -51,6 +56,11 @@ class FormAgent extends Agent {
                 },
                 "em01": (user, data, response) => {
                     const motG01AnswersObject = readFormAnswersFile("motG01", user);
+                    if (motG01AnswersObject.length === 0) {
+                        data.disabled = true;
+                        response.formData = data;
+                        return response;
+                    }
                     const motG01Answers = motG01AnswersObject[motG01AnswersObject.length - 1];
                     const canPressQuestionId = "4uC28XYW";
                     const canPressQuestion = motG01Answers.answers.find(a => a.id === canPressQuestionId);
@@ -61,6 +71,11 @@ class FormAgent extends Agent {
                 },
                 "em02": (user, data, response) => {
                     const motG01AnswersObject = readFormAnswersFile("motG01", user);
+                    if (motG01AnswersObject.length === 0) {
+                        data.disabled = true;
+                        response.formData = data;
+                        return response;
+                    }
                     const motG01Answers = motG01AnswersObject[motG01AnswersObject.length - 1];
                     const headMovementQuestionId = "mUXFsHPj";
                     const headMovementQuestion = motG01Answers.answers.find(a => a.id === headMovementQuestionId);
@@ -71,6 +86,11 @@ class FormAgent extends Agent {
                 },
                 "em03": (user, data, response) => {
                     const motG01AnswersObject = readFormAnswersFile("motG01", user);
+                    if (motG01AnswersObject.length === 0) {
+                        data.disabled = true;
+                        response.formData = data;
+                        return response;
+                    }
                     const motG01Answers = motG01AnswersObject[motG01AnswersObject.length - 1];
                     const nistagmoQuestionId = "geDTuWoo";
                     const nistagmoQuestion = motG01Answers.answers.find(a => a.id === nistagmoQuestionId);
