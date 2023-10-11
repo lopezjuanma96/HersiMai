@@ -153,6 +153,8 @@ class AnswerAgent extends Agent {
     }
 }
 
+const answerAgent = new AnswerAgent();
+
 class ReportAgent extends Agent {
     /*
         Called when generating reports
@@ -161,16 +163,72 @@ class ReportAgent extends Agent {
         super();
         this.name = 'ReportAgent';
         this.rules = {
-
+            formula: {
+                ottaa: [
+                    {question: "47neZv1P", answer: "Sí", weight: 0.25}, // A
+                    {question: "wVBYaohP", answer: "Cuatro o más", weight: 0.25}, // D
+                    {question: "pwJP0k3S", answer: "Armado de frases/desarrollo del lenguaje", weight: 0.25}, // E
+                    {question: "gAkBS6Bb", answer: "Sí", weight: 0.25}, // M
+                    {question: "wVBYaohP", answer: "Entre dos", weight: 0.15}, //C
+                    {question: "gAkBS6Bb", answer: "No", weight: 0.15}, //N
+                    {question: "47neZv1P", answer: "No", weight: -0.10}, // B
+                    {question: "JJhQjNqq", answer: "Sí", weight: -0.10}, // G
+                    {question: "SEoP70yq", answer: "No", weight: -0.10}  // L
+                ],
+                cboard: [
+                    {question: "wVBYaohP", answer: "Cuatro o más", weight: 0.25}, // D
+                    {question: "pwJP0k3S", answer: "Armado de frases/desarrollo del lenguaje", weight: 0.25}, // E
+                    {question: "JJhQjNqq", answer: "Sí", weight: 0.25}, // G
+                    {question: "SEoP70yq", answer: "No", weight: 0.25}, // L
+                    {question: "wVBYaohP", answer: "Entre dos", weight: 0.075}, //C
+                    {question: "pwJP0k3S", answer: "Iniciación en la comunicación (fase 1 o 2 de PECS)", weight: 0.075}, // F
+                    {question: "JJhQjNqq", answer: "No", weight: 0.075}, // H
+                    {question: "SEoP70yq", answer: "Sí", weight: 0.075},  // K
+                    {question: "gAkBS6Bb", answer: "Sí", weight: -0.15} // M
+                ],
+                questions: [
+                    {question: "wVBYaohP", answer: "Entre dos", weight: 0.075}, //C
+                    {question: "pwJP0k3S", answer: "Iniciación en la comunicación (fase 1 o 2 de PECS)", weight: 0.075}, // F
+                ]
+            }
         }
     }
 
-    apply() {
+    calculateSoftware(user){
+        const answersFile = readFormAnswersFile("softG01", user);
+        if (answersFile.length === 0) return "insufficient";
+        const answers = answersFile[-1].answers;
+        const answersMapped = Object.fromEntries(answers.map(a => [a.id, a]))
+        // run through rules->formula using adding weights to percentage if answer is correct
+        const formula = this.rules.formula;
+        const scores = {};
+        const messages = {}; // NOT IMPLEMENTED YET: each score has a message, and those with most influence will be returned to show in the web as "justifications" for the score for each app
+        let allZero = true;
+        for (let app in formula) {
+            scores[app] = 0;
+            for (let question of formula[app]) {
+                if (answersMapped[question.question].answer === question.answer) scores[app] += question.weight;
+            }
+            if (scores[app] > 0) allZero = false; // if at least one app has a positive score, then the user is not "insufficient"
+        }
+        if (allZero) return "insufficient";
+        return {scores, messages};
+    }
+
+    calculateHardware(user){
+        return "insufficient";
+    }
+
+    apply(type, user, data, response) {
         super.apply();
-        console.log('ReportAgent applied');
+        // console.log('ReportAgent applied');
+        data.software = this.calculateSoftware(user);
+        data.hardware = this.calculateHardware(user);
+        response.data = data;
+        return response;
     }
 }
 
-const answerAgent = new AnswerAgent();
+const reportAgent = new ReportAgent();
 
-module.exports = { formAgent, answerAgent };
+module.exports = { formAgent, answerAgent, reportAgent };

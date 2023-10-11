@@ -8,6 +8,9 @@ const titleBlockEvalState = document.getElementById("titleBlockEvalState");
 
 const listTableBody = document.getElementById("listTableBody");
 
+const titleBlockReport = document.getElementById("titleBlockReport");
+titleBlockReport.addEventListener("click", () => window.location.pathname = "/report")
+
 // Since there are many dependant fetches, we will write an async function fetchData.
 // This will include:
 // 1. Fetching the user details
@@ -289,5 +292,4 @@ const copyToClipBoard = (userCode, formId, formType) => {
     }code=${userCode}`;
     //console.log(url)
     navigator.clipboard.writeText(url);
-    
 }
