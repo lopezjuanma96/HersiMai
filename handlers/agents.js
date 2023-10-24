@@ -197,7 +197,7 @@ class ReportAgent extends Agent {
     calculateSoftware(user){
         const answersFile = readFormAnswersFile("softG01", user);
         if (answersFile.length === 0) return "insufficient";
-        const answers = answersFile[-1].answers;
+        const answers = answersFile[answersFile.length-1].answers;
         const answersMapped = Object.fromEntries(answers.map(a => [a.id, a]))
         // run through rules->formula using adding weights to percentage if answer is correct
         const formula = this.rules.formula;

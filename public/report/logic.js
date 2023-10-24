@@ -42,8 +42,80 @@ async function fetchData() {
     return { userDetail, reportDetail }
 }
 
-fetchData().then(({ userDetail, reportDetail }) => {
-    titleBlockUserName.innerText = userDetail.name;
+const renderSoftwareLine = (appName, appScores, appMessages) => {
+    // THIS SHOULD BE TAKEN TO THE COMPONENT LATER
+    if (appMessages) {
+        ;
+    } else {
+        console.log(appName, 'does not have a message')
+    }
+    ///////////////////////////////////////////////
 
-    console.log(reportDetail);
+    appScores = typeof appScores === 'string' ? parseFloat(appScores) : appScores;
+    const percentage = Math.round(appScores * 100);
+
+    return `
+    <div class="container softwareLine">
+        <div class="row">
+            <div class="col-3 h3 fw-bold">${appName.toUpperCase()}</div>
+            <div class="col-7"></div>
+            <div class="col-2 h3 fw-bold text-end">${percentage}%</div>
+        </div>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <ul>
+                    <li class="lead">Justificación 1</li>
+                    <li class="lead">Justificación 2</li>
+                    <li class="lead">Justificación 3</li>
+                </ul>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+    `
+}
+
+const renderHardwareLine = (deviceName, deviceScores, deviceMessages) => {
+    // THIS SHOULD BE TAKEN TO THE COMPONENT LATER
+    if (deviceMessages) {
+        ;
+    } else {
+        console.log(deviceName, 'does not have a message')
+    }
+    ///////////////////////////////////////////////
+
+    return `
+
+    `
+}
+
+fetchData().then(({ userDetail, reportDetail }) => {
+    titleBlockUserName.innerText = userDetail.userName;
+
+    if (reportDetail.software === 'insufficient'){
+        softwareBlock.innerHTML = `
+        <div class="text-center">Datos insuficientes</div>
+        `
+        console.log('Insufficient software data');
+    } else {
+        for (let appName in reportDetail.software.scores) {
+            const thisAppScores = reportDetail.software.scores[appName];
+            const thisAppMessages = reportDetail.software.messages[appName];
+            softwareBlock.innerHTML += renderSoftwareLine(appName, thisAppScores, thisAppMessages);
+        }
+    }
+
+    if (reportDetail.hardware === 'insufficient'){
+        hardwareBlock.innerHTML += `
+        <div class="text-center h4">Datos insuficientes</div>
+        `
+        console.log('Insufficient hardware data');
+    } else {
+        for (let deviceName in reportDetail.hardware.scores) {
+            const thisDeviceScores = reportDetail.hardware.scores[deviceName];
+            const thisDeviceMessages = reportDetail.hardware.messages[deviceName];
+            renderHardwareLine(deviceName, thisDeviceScores, thisDeviceMessages);
+        }
+    }
 })
