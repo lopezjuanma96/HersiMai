@@ -203,20 +203,112 @@ class ReportAgent extends Agent {
         const formula = this.rules.formula;
         const scores = {};
         const messages = {}; // NOT IMPLEMENTED YET: each score has a message, and those with most influence will be returned to show in the web as "justifications" for the score for each app
-        let allZero = true;
         for (let app in formula) {
             scores[app] = 0;
             for (let question of formula[app]) {
                 if (answersMapped[question.question].answer === question.answer) scores[app] += question.weight;
             }
-            if (scores[app] > 0) allZero = false; // if at least one app has a positive score, then the user is not "insufficient"
         }
-        if (allZero) return "insufficient";
+        // filter out zero scores
+        const scores_filtered = Object.fromEntries(Object.entries(scores).filter(([k,v]) => v !== 0));
+        if (Object.keys(scores_filtered).length === 0) return "insufficient";
         return {scores, messages};
     }
 
+    calculateHardwareEM00(user){
+        const answersFile = readFormAnswersFile("em00", user);
+        if (answersFile.length === 0) return 0;
+        const answers = answersFile[answersFile.length-1].answers;
+        const answersMapped = Object.fromEntries(answers.map(a => [a.id, a]))
+        const messages = [];
+        if (answersMapped['Wqwzz6bj']){
+            // this should not be the way to do it, this question should come as number and not a percentage string, but it's a quick fix
+            const percentage = parseInt(answersMapped['Wqwzz6bj'].answer.replace("%", ""));
+            if (percentage >= 60) messages.push("Utilizar acceso táctil de manera directa.");
+            else messages.push("Utilizar acceso táctil con barrido de pantalla.")
+        }
+        if (answersMapped['g7SlQAZP']?.answer >= 5) return [1.0, messages];
+        else return [0.0, []];
+    }
+
+    calculateHardwareEM01(user){
+        const answersFile = readFormAnswersFile("em01", user);
+        if (answersFile.length === 0) return 0;
+        const answers = answersFile[answersFile.length-1].answers;
+        const answersMapped = Object.fromEntries(answers.map(a => [a.id, a]))
+        if (answersMapped['KU3N33I4']?.answer >= 2 && answersMapped['ikM8GCC7']?.answer >= 2) return [
+            1.0, 
+            ['Utilizar el Press&Press de manera convencional']
+        ];
+        else if (answersMapped['KU3N33I4']?.answer >= 2) return [
+            0.8,
+            ['Utilizar un sólo Press en la mano derecha y el barrido automático']
+        ]
+        else if (answersMapped['ikM8GCC7']?.answer >= 2) return [
+            0.8,
+            ['Utilizar un sólo Press en la mano izquierda y el barrido automático']
+        ]
+        else return [0.0, []];
+    }
+
+    calculateHardwareEM02(user){
+        // evaluation for bocho is not implemented yet
+        return [0.0, []];
+    }
+
+    calculateHardwareEM03(user){
+        // evaluation for ocus is not implemented yet
+        return [0.0, []];
+    }
+
     calculateHardware(user){
-        return "insufficient";
+        const answersFile = readFormAnswersFile("motG01", user);
+        if (answersFile.length === 0) return "insufficient";
+        const answers = answersFile[answersFile.length-1].answers;
+        const answersMapped = Object.fromEntries(answers.map(a => [a.id, a]))
+        // run through motG01 answers and depending on the answer calculate the score for each device
+        // each score will apply if the previous doesn't
+        const scores = {};
+        const messages = {};
+        if (answersMapped['sIh2a0Sw']?.answer === "Sí"){
+            const [score, message] = this.calculateHardwareEM00(user);
+            if (score !== 0) {
+                scores.tactil = score;
+                messages.tactil = message;
+            }
+        }
+        if (answersMapped['4uC28XYW']?.answer === "Sí" && !scores.tactil){
+            const [score, message] = this.calculateHardwareEM01(user);
+            if (score !== 0) {
+                scores['press&press'] = score;
+                messages['press&press'] = message;
+            }
+        }
+        if (answersMapped['mUXFsHPj']?.answer === "Sí" && !scores.tactil && !scores['press&press']){
+            const [score, message] = this.calculateHardwareEM02(user);
+            if (score !== 0) {
+                scores.bocho = score;
+                messages.bocho = message;
+            }
+        }
+        if (answersMapped['geDTuWoo']?.answer === "No" && !scores.tactil && !scores['press&press'] && !scores.bocho){
+            const [score, message] = this.calculateHardwareEM03(user);
+            if (score !== 0) {
+                scores.ocus = score;
+                messages.ocus = message;
+            }
+        }
+        // filter out zero scores
+        const scores_filtered = Object.fromEntries(Object.entries(scores).filter(([k,v]) => v !== 0));
+        if (Object.keys(scores_filtered).length === 0){
+            // try recommending TICA
+            if (answersMapped['geDTuWoo']?.answer === "Sí") {
+                scores_filtered.tica = 1;
+                messages.tica = "Recomendado por nistagmo";
+            }
+            else return "insufficient";
+        }
+        return {scores: scores_filtered, messages};
     }
 
     apply(type, user, data, response) {

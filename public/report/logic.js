@@ -77,16 +77,29 @@ const renderSoftwareLine = (appName, appScores, appMessages) => {
 }
 
 const renderHardwareLine = (deviceName, deviceScores, deviceMessages) => {
-    // THIS SHOULD BE TAKEN TO THE COMPONENT LATER
-    if (deviceMessages) {
-        ;
-    } else {
-        console.log(deviceName, 'does not have a message')
-    }
-    ///////////////////////////////////////////////
+    
+    deviceScores = typeof deviceScores === 'string' ? parseFloat(deviceScores) : deviceScores;
+    const percentage = Math.round(deviceScores * 100);
 
     return `
-
+    <div class="container softwareLine">
+        <div class="row">
+            <div class="col-3 h3 fw-bold">${deviceName.toUpperCase()}</div>
+            <div class="col-7"></div>
+            <div class="col-2 h3 fw-bold text-end">${percentage}%</div>
+        </div>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <ul>
+                    ${
+                        deviceMessages.map(message => `<li class="lead">${message}</li>`).join('\n')
+                    }
+                </ul>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
     `
 }
 
@@ -101,6 +114,7 @@ fetchData().then(({ userDetail, reportDetail }) => {
     } else {
         for (let appName in reportDetail.software.scores) {
             const thisAppScores = reportDetail.software.scores[appName];
+            if (thisAppScores == 0) continue;
             const thisAppMessages = reportDetail.software.messages[appName];
             softwareBlock.innerHTML += renderSoftwareLine(appName, thisAppScores, thisAppMessages);
         }
@@ -114,8 +128,9 @@ fetchData().then(({ userDetail, reportDetail }) => {
     } else {
         for (let deviceName in reportDetail.hardware.scores) {
             const thisDeviceScores = reportDetail.hardware.scores[deviceName];
+            if (thisDeviceScores == 0) continue;
             const thisDeviceMessages = reportDetail.hardware.messages[deviceName];
-            renderHardwareLine(deviceName, thisDeviceScores, thisDeviceMessages);
+            hardwareBlock.innerHTML += renderHardwareLine(deviceName, thisDeviceScores, thisDeviceMessages);
         }
     }
 })
