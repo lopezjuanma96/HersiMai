@@ -69,6 +69,14 @@ a {
     background-image: linear-gradient(#ff7a00, #ff8f27);
 }
 
+#bochoLine {
+    background-image: linear-gradient(#641fe2, #854feb);
+}
+
+#ocusLine {
+    background-image: linear-gradient(#dc70eb, #e43afa);
+}
+
 #mainBlock {
     background-color: white;
 }
