@@ -158,6 +158,36 @@ const answerAgent = new AnswerAgent();
 class ReportAgent extends Agent {
     /*
         Called when generating reports
+
+        reference:
+
+        OTTAA:
+            Ya que seleccionó:
+                A: Predectibilidad, otorga una interfaz dinámica recomendando pictogramas relacionados al pictograma seleccionado. 
+                D: Cuatro o más estímulos, la interfaz principal de OTTAA muestra siempre 4 pictogramas. Esta cantidad no puede modificarse.
+                E: Armado de frases / desarrollo del lenguaje, OTTAA permite armar frases de manera fácil y rápida, utilizando conceptos como “quiero ir a”, “quiero comer”.
+                M: Evitar clics consecutivos, se puede establecer un tiempo de espera entre cada click consecutivo para evitar toques involuntarios.
+                C: Dos estímulos, OTTAA siempre mostrará 4 pictogramas, se puede utilizar la sección de “Juegos” para trabajar con 2 estímulos dentro de OTTAA.
+            NOTA: Permite crear y borrar pictogramas, así como personalizar imagen y texto de los pictogramas.
+                El tamaño de los pictogramas y la cantidad que se muestran es fijo.
+                Presenta la opción de generar un informe, indicando frecuencia de uso y pictogramas más utilizados.
+        
+        CBOARD:
+            Ya que seleccionó:
+                D: Cuatro o más estímulos, CBOARD permite modificar la cantidad y tamaño de pictogramas que se muestran. 
+                E: Armado de frases / desarrollo del lenguaje, CBOARD permite armar frases utilizando tableros basados en vocabulario núcleo. 
+                G: Teclado, existe una opción para activar un teclado virtual de texto a voz. 
+                L: Mayor tamaño, CBOARD permite modificar el tamaño y cantidad de los pictogramas que se muestran.
+                F: Iniciación en comunicación, CBOARD permite personalizar sus tableros, creando tableros sencillos de pocos pictogramas.
+            NOTA: No recomendado para usar con barrido de pantalla táctil.
+                Permite crear y borrar pictogramas, así como personalizar imagen, texto, cantidad y tamaño de los pictogramas.
+        
+        QUESTIONS:
+            Ya que seleccionó:
+                C: Entre dos, QUESTIONS siempre mostrará dos pictogramas SI/NO. 
+                F: Iniciación en comunicación, permite trabajar con preguntas sencillas del tipo SI/NO, buscando además disntiguir entre ambos pictogramas.
+            NOTA: Recomendado para usar con PRESS&PRESS.
+                Los pictogramas no son personalizables, ni se pueden crear nuevos. Siempre muestra SI/NO y tamaño fijo.
     */
     constructor() {
         super();
@@ -165,30 +195,45 @@ class ReportAgent extends Agent {
         this.rules = {
             formula: {
                 ottaa: [
-                    {question: "47neZv1P", answer: "Sí", weight: 0.25}, // A
-                    {question: "wVBYaohP", answer: "Cuatro o más", weight: 0.25}, // D
-                    {question: "pwJP0k3S", answer: "Armado de frases/desarrollo del lenguaje", weight: 0.25}, // E
-                    {question: "gAkBS6Bb", answer: "Sí", weight: 0.25}, // M
-                    {question: "wVBYaohP", answer: "Entre dos", weight: 0.15}, //C
+                    {question: "47neZv1P", answer: "Sí", weight: 0.25, message: "Predectibilidad, otorga una interfaz dinámica recomendando pictogramas relacionados al pictograma seleccionado."}, // A
+                    {question: "wVBYaohP", answer: "Cuatro o más", weight: 0.25, message: "Cuatro o más estímulos, la interfaz principal de OTTAA muestra siempre 4 pictogramas. Esta cantidad no puede modificarse."}, // D
+                    {question: "pwJP0k3S", answer: "Armado de frases/desarrollo del lenguaje", weight: 0.25, message: "Armado de frases / desarrollo del lenguaje, OTTAA permite armar frases de manera fácil y rápida, utilizando conceptos como “quiero ir a”, “quiero comer”."}, // E
+                    {question: "gAkBS6Bb", answer: "Sí", weight: 0.25, message: "Evitar clics consecutivos, se puede establecer un tiempo de espera entre cada click consecutivo para evitar toques involuntarios."}, // M
+                    {question: "wVBYaohP", answer: "Entre dos", weight: 0.15, message: "Dos estímulos, OTTAA siempre mostrará 4 pictogramas, se puede utilizar la sección de “Juegos” para trabajar con 2 estímulos dentro de OTTAA."}, //C
                     {question: "gAkBS6Bb", answer: "No", weight: 0.15}, //N
                     {question: "47neZv1P", answer: "No", weight: -0.10}, // B
                     {question: "JJhQjNqq", answer: "Sí", weight: -0.10}, // G
                     {question: "SEoP70yq", answer: "No", weight: -0.10}  // L
                 ],
                 cboard: [
-                    {question: "wVBYaohP", answer: "Cuatro o más", weight: 0.25}, // D
-                    {question: "pwJP0k3S", answer: "Armado de frases/desarrollo del lenguaje", weight: 0.25}, // E
-                    {question: "JJhQjNqq", answer: "Sí", weight: 0.25}, // G
-                    {question: "SEoP70yq", answer: "No", weight: 0.25}, // L
+                    {question: "wVBYaohP", answer: "Cuatro o más", weight: 0.25, message: "Cuatro o más estímulos, CBOARD permite modificar la cantidad y tamaño de pictogramas que se muestran."}, // D
+                    {question: "pwJP0k3S", answer: "Armado de frases/desarrollo del lenguaje", weight: 0.25, message: "Armado de frases / desarrollo del lenguaje, CBOARD permite armar frases utilizando tableros basados en vocabulario núcleo."}, // E
+                    {question: "JJhQjNqq", answer: "Sí", weight: 0.25, message: "Teclado, existe una opción para activar un teclado virtual de texto a voz."}, // G
+                    {question: "SEoP70yq", answer: "No", weight: 0.25, message: "Mayor tamaño, CBOARD permite modificar el tamaño y cantidad de los pictogramas que se muestran."}, // L
                     {question: "wVBYaohP", answer: "Entre dos", weight: 0.075}, //C
-                    {question: "pwJP0k3S", answer: "Iniciación en la comunicación (fase 1 o 2 de PECS)", weight: 0.075}, // F
+                    {question: "pwJP0k3S", answer: "Iniciación en la comunicación (fase 1 o 2 de PECS)", weight: 0.075, message: "Iniciación en comunicación, CBOARD permite personalizar sus tableros, creando tableros sencillos de pocos pictogramas."}, // F
                     {question: "JJhQjNqq", answer: "No", weight: 0.075}, // H
                     {question: "SEoP70yq", answer: "Sí", weight: 0.075},  // K
                     {question: "gAkBS6Bb", answer: "Sí", weight: -0.15} // M
                 ],
                 questions: [
-                    {question: "wVBYaohP", answer: "Entre dos", weight: 0.075}, //C
-                    {question: "pwJP0k3S", answer: "Iniciación en la comunicación (fase 1 o 2 de PECS)", weight: 0.075}, // F
+                    {question: "wVBYaohP", answer: "Entre dos", weight: 0.075, message: "Entre dos, QUESTIONS siempre mostrará dos pictogramas SI/NO."}, //C
+                    {question: "pwJP0k3S", answer: "Iniciación en la comunicación (fase 1 o 2 de PECS)", weight: 0.075, message: "Iniciación en comunicación, permite trabajar con preguntas sencillas del tipo SI/NO, buscando además disntiguir entre ambos pictogramas."}, // F
+                ]
+            },
+            extra_messages: {
+                ottaa: [
+                    "Permite crear y borrar pictogramas, así como personalizar imagen y texto de los pictogramas.",
+                    "El tamaño de los pictogramas y la cantidad que se muestran es fijo.",
+                    "Presenta la opción de generar un informe, indicando frecuencia de uso y pictogramas más utilizados."
+                ],
+                cboard: [
+                    "No recomendado para usar con barrido de pantalla táctil.",
+                    "Permite crear y borrar pictogramas, así como personalizar imagen, texto, cantidad y tamaño de los pictogramas."
+                ],
+                questions: [
+                    "Recomendado para usar con PRESS&PRESS.",
+                    "Los pictogramas no son personalizables, ni se pueden crear nuevos. Siempre muestra SI/NO y tamaño fijo."
                 ]
             }
         }
@@ -205,8 +250,20 @@ class ReportAgent extends Agent {
         const messages = {}; // NOT IMPLEMENTED YET: each score has a message, and those with most influence will be returned to show in the web as "justifications" for the score for each app
         for (let app in formula) {
             scores[app] = 0;
+            messages[app] = [];
             for (let question of formula[app]) {
-                if (answersMapped[question.question].answer === question.answer) scores[app] += question.weight;
+                if (answersMapped[question.question].answer === question.answer) {
+                    scores[app] += question.weight;
+                    if (question.message) {
+                        messages[app].push([question.message, question.weight]);
+                    }
+                }
+            }
+            // sort and filter question messages
+            if (messages[app].length !== 0) messages[app] = messages[app].sort((a, b) => b[1] - a[1]).map(m => m[0]).slice(0, 3);
+            // add extra messages (NOTES)
+            for (var extra_message of this.rules.extra_messages[app] || []){
+                messages[app].push("NOTA: " + extra_message);
             }
         }
         // filter out zero scores

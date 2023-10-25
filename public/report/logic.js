@@ -43,34 +43,29 @@ async function fetchData() {
 }
 
 const renderSoftwareLine = (appName, appScores, appMessages) => {
-    // THIS SHOULD BE TAKEN TO THE COMPONENT LATER
-    if (appMessages) {
-        ;
-    } else {
-        console.log(appName, 'does not have a message')
-    }
-    ///////////////////////////////////////////////
 
+    const appId = appName;
     appScores = typeof appScores === 'string' ? parseFloat(appScores) : appScores;
     const percentage = Math.round(appScores * 100);
 
     return `
-    <div class="container softwareLine">
+    <div class="container mt-2 mb-1 reportLine softwareLine" id="${appId}Line">
         <div class="row">
-            <div class="col-3 h3 fw-bold">${appName.toUpperCase()}</div>
-            <div class="col-7"></div>
-            <div class="col-2 h3 fw-bold text-end">${percentage}%</div>
-        </div>
-        <div class="row">
+            <div class="col-6 h3 fw-bold">${appName.toUpperCase()}</div>
             <div class="col-1"></div>
-            <div class="col-10">
+            <div class="col-5 h3 fw-bold text-end">${percentage}%</div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-0 col-sm-1"></div>
+            <div class="col-12 col-sm-10">
                 <ul>
-                    <li class="lead">Justificación 1</li>
-                    <li class="lead">Justificación 2</li>
-                    <li class="lead">Justificación 3</li>
+                    ${
+                        appMessages.map(message => `<li class="lead">${message}</li>`).join('\n')
+                    }
                 </ul>
             </div>
-            <div class="col-1"></div>
+            <div class="col-0 col-sm-1"></div>
         </div>
     </div>
     `
@@ -78,26 +73,28 @@ const renderSoftwareLine = (appName, appScores, appMessages) => {
 
 const renderHardwareLine = (deviceName, deviceScores, deviceMessages) => {
     
+    const deviceId = deviceName === 'press&press' ? 'press' : deviceName;
     deviceScores = typeof deviceScores === 'string' ? parseFloat(deviceScores) : deviceScores;
     const percentage = Math.round(deviceScores * 100);
 
     return `
-    <div class="container softwareLine">
+    <div class="container mt-2 mb-1 reportLine hardwareLine" id="${deviceId}Line">
         <div class="row">
-            <div class="col-3 h3 fw-bold">${deviceName.toUpperCase()}</div>
-            <div class="col-7"></div>
-            <div class="col-2 h3 fw-bold text-end">${percentage}%</div>
-        </div>
-        <div class="row">
+            <div class="col-6 h3 fw-bold">${deviceName.toUpperCase()}</div>
             <div class="col-1"></div>
-            <div class="col-10">
+            <div class="col-5 h3 fw-bold text-end">${percentage}%</div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-0 col-sm-1"></div>
+            <div class="col-12 col-sm-10">
                 <ul>
                     ${
                         deviceMessages.map(message => `<li class="lead">${message}</li>`).join('\n')
                     }
                 </ul>
             </div>
-            <div class="col-1"></div>
+            <div class="col-0 col-sm-1"></div>
         </div>
     </div>
     `

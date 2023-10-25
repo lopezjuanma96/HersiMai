@@ -18,51 +18,6 @@ a {
     opacity: 70%;
 }
 
-.blueButton {
-    background-color: #3700ff;
-    border-color: #3700ff;
-}
-
-.blueButton:hover {
-    background-color: #3700ff;
-    border-color: #3700ff;
-    opacity: 70%;
-}
-
-.emeraldButton {
-    background-color: #03bb85;
-    border-color: #03bb85;
-}
-
-.emeraldButton:hover {
-    background-color: #03bb85;
-    border-color: #03bb85;
-    cursor: not-allowed;
-    opacity: 70%;
-}
-
-.redButton {
-    background-color: #ff0000;
-    border-color: #ff0000;
-}
-
-.redButton:hover {
-    background-color: #ff0000;
-    border-color: #ff0000;
-    opacity: 70%;
-}
-
-.grayButton {
-    background-color: gray;
-    border-color: gray;
-}
-
-.grayButton:hover {
-    background-color: gray;
-    border-color: gray;
-    cursor: not-allowed;
-}
-
 .bgdGray {
     background-color: gray;
 }
@@ -81,6 +36,37 @@ a {
 
 .textGray {
     color: gray;
+}
+
+.reportLine {
+    border: 0px solid black;
+    border-radius: 12px;
+    color: white;
+}
+
+.reportLine hr {
+    border-width: 3px;
+    border-radius: 12px;
+}
+
+#ottaaLine {
+    background-image: linear-gradient(#FF7A00, #ff8f27);
+}
+
+#cboardLine {
+    background-image: linear-gradient(#641fe2, #854feb);
+}
+
+#questionsLine {
+    background-image: linear-gradient(#00b8ff, #3acdfa);
+}
+
+#tactilLine {
+    background-image: linear-gradient(#0e0f0f, #18191a);
+}
+
+#pressLine {
+    background-image: linear-gradient(#ff7a00, #ff8f27);
 }
 
 #mainBlock {
